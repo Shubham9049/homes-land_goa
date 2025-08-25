@@ -7,7 +7,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className="bg-[var(--bg-color)] text-[var(--title)]  py-12">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 md:w-5/6 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto">
         {/* Brand Section */}
         <div className="md:col-span-1">
           <Image src={logo} alt="" width={200} />

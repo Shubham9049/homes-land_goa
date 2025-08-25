@@ -1,4 +1,8 @@
 "use client";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import Footer from "../../components/Footer";
 import HelpSection from "../../components/HelpSection";
 import Hero from "../../components/Hero";
@@ -7,6 +11,7 @@ import PopularResidences from "../../components/PopularResidences";
 import Stats from "../../components/Stats";
 import { MapPin, User, ClipboardList, Handshake } from "lucide-react";
 import ReviewSection from "../../components/Testimonial";
+
 const features = [
   {
     icon: <MapPin size={32} />,
@@ -35,13 +40,26 @@ const features = [
 ];
 
 function Landing() {
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
     <div>
       <Navbar />
       <Hero />
       <PopularResidences />
       <Stats />
-      <section className="py-12 w-11/12 md:w-5/6 mx-auto text-center">
+
+      {/* Why Choose Us */}
+      <section
+        className="py-12 w-11/12 md:w-5/6 mx-auto text-center"
+        data-aos="fade-up"
+      >
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[var(--title)]">
           Why Choose Us
@@ -58,6 +76,8 @@ function Landing() {
             <div
               key={index}
               className="bg-[#dec3b3] text-left p-6 rounded-2xl shadow-sm hover:shadow-md transition-all"
+              data-aos="zoom-in-up"
+              data-aos-delay={index * 200} // stagger animation
             >
               <div className="bg-[var(--bg-color)] p-3 rounded-md w-fit mb-4 text-[var(--title)]">
                 {feature.icon}
@@ -72,6 +92,7 @@ function Landing() {
           ))}
         </div>
       </section>
+
       <ReviewSection />
       <HelpSection />
       <Footer />
