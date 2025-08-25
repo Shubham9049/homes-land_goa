@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+#google_translate_element span {
+  display: none;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.goog-te-gadget {
+  font-size: 0px !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+#google_translate_element select {
+  @apply bg-transparent text-white border border-white px-2 rounded-full py-1;
 }
 
+#google_translate_element select option {
+  background-color: black;
+  color: white;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  top: 0px !important;
+}
+
+/* Hide Google’s default gadget icon */
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+/* Force white text inside custom language selector */
+select,
+select option {
+  color: black !important;
+}
+
+/* For your specific selector */
+.language-selector {
+  color: black !important;
+  max-width: 120px;
+}
+
+.language-selector option {
+  color: black !important;
+  background-color: white !important;
 }
