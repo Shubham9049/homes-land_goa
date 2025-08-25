@@ -44,3 +44,9 @@ select option {
   color: black !important;
   background-color: white !important;
 }
+
+:root {
+  --primary-color: #4f3527;
+  --title: #2b1b12;
+  --bg-color: #fef7f2;
+}
