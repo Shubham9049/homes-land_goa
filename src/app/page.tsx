@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar";
 import PopularResidences from "../../components/PopularResidences";
 import Stats from "../../components/Stats";
 import { MapPin, User, ClipboardList, Handshake } from "lucide-react";
+import ReviewSection from "../../components/Testimonial";
 const features = [
   {
     icon: <MapPin size={32} />,
@@ -71,6 +72,7 @@ function Landing() {
           ))}
         </div>
       </section>
+      <ReviewSection />
       <HelpSection />
       <Footer />
     </div>

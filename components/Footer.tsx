@@ -1,22 +1,21 @@
 "use client";
 
 import { Instagram, Facebook, Twitter } from "lucide-react";
+import logo from "../assets/logo.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#ddc7bb] text-[#3d2a20] px-6 md:px-16 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+    <footer className="bg-[var(--bg-color)] text-[var(--title)]  py-12">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 md:w-5/6 mx-auto">
         {/* Brand Section */}
         <div className="md:col-span-1">
-          <h2 className="text-2xl font-extrabold mb-4 tracking-wide">Dwello</h2>
-          <p className="text-base font-medium max-w-xs">
-            Bringing you closer to your dream home, one click at a time.
-          </p>
+          <Image src={logo} alt="" width={200} />
         </div>
 
         {/* About */}
         <div>
-          <h3 className="font-bold mb-3">About</h3>
+          <h3 className="text-2xl font-bold mb-3">About</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
               <a href="#">Our Story</a>
@@ -35,7 +34,7 @@ const Footer = () => {
 
         {/* Support */}
         <div>
-          <h3 className="font-bold mb-3">Support</h3>
+          <h3 className="text-2xl font-bold mb-3">Support</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
               <a href="#">FAQ</a>
@@ -54,7 +53,7 @@ const Footer = () => {
 
         {/* Find Us */}
         <div>
-          <h3 className="font-bold mb-3">Find Us</h3>
+          <h3 className="text-2xl font-bold mb-3">Find Us</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
               <a href="#">Events</a>
@@ -70,7 +69,7 @@ const Footer = () => {
 
         {/* Social Links */}
         <div>
-          <h3 className="font-bold mb-3">Our Social</h3>
+          <h3 className=" text-2xl font-bold mb-3">Our Social</h3>
           <ul className="space-y-3 text-base font-medium">
             <li className="flex items-center gap-2">
               <Instagram size={18} /> Instagram

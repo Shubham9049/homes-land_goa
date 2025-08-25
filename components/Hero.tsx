@@ -26,13 +26,10 @@ export default function Hero() {
         </div>
 
         {/* ✅ Right Image */}
-        <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
+        <div className="relative w-full ">
           <Image
             src={hero} // 👉 place your house image in public/
             alt="Dream Home"
-            fill
-            className="object-contain"
-            priority
           />
         </div>
       </div>

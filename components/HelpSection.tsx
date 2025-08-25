@@ -6,14 +6,14 @@ const HelpSection = () => {
   return (
     <section className="bg-white py-16 px-6 text-center">
       {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-extrabold text-[#3d2a20] mb-4">
+      <h2 className="text-3xl md:text-5xl font-bold text-[var(--title)] mb-4">
         Do You Have Any Questions?
         <br />
         Get Help From Us
       </h2>
 
       {/* Support Options */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-6 mb-10 text-[#3d2a20] font-medium">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-6 mb-10 text-[var(--primary-color)] font-medium">
         <div className="flex items-center gap-2">
           <MessageCircle className="w-5 h-5" />
           <span>Chat live with our support team</span>
@@ -26,18 +26,18 @@ const HelpSection = () => {
 
       {/* Newsletter / Email Form */}
       <form className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
-        <div className="flex items-center bg-[#e6cfc2] text-[#3d2a20] rounded-md px-4 py-3 flex-grow shadow-sm w-full">
+        <div className="flex items-center bg-[var(--bg-color)] text-[var(--primary-color)] rounded-md px-4 py-3 flex-grow shadow-sm w-full">
           <Mail className="w-5 h-5 mr-2" />
           <input
             type="email"
             placeholder="Enter your email address..."
-            className="bg-transparent outline-none flex-grow placeholder-[#3d2a20] text-base"
+            className="bg-transparent outline-none flex-grow placeholder-[var(--title)] text-base"
             required
           />
         </div>
         <button
           type="submit"
-          className="bg-[#3d2a20] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#2a1b13] transition"
+          className="bg-[var(--title)] cursor-pointer text-white px-6 py-3 rounded-md font-semibold hover:bg-[#2a1b13] transition"
         >
           Submit
         </button>
