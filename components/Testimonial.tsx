@@ -17,33 +17,33 @@ interface Review {
 
 const reviews: Review[] = [
   {
-    name: "RAVI MEHTA",
+    name: "JOHN DOE",
     content:
-      "Buying my first home with Mondus Properties was an amazing experience. The team guided me through every step with complete transparency and professionalism.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nibh nec fermentum vehicula, magna lacus facilisis leo.",
     rating: 5,
   },
   {
-    name: "NEHA KAPOOR",
+    name: "JANE SMITH",
     content:
-      "I was looking for a premium apartment in Goa, and Mondus helped me find exactly what I wanted. Their personalized service made the entire process stress-free.",
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
     rating: 5,
   },
   {
-    name: "ARJUN NAIR",
+    name: "MICHAEL BROWN",
     content:
-      "What I loved most was the honesty and clarity. No hidden charges, no false promises — just a smooth and transparent buying process. Highly recommended!",
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.",
     rating: 5,
   },
   {
-    name: "SAMEERA KHAN",
+    name: "EMILY DAVIS",
     content:
-      "We were relocating from Dubai to Goa, and Mondus made everything so simple. From site visits to paperwork, the support was outstanding.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet eros eu libero hendrerit ullamcorper.",
     rating: 5,
   },
   {
-    name: "VIKRAM DESAI",
+    name: "DAVID WILSON",
     content:
-      "Mondus Properties helped me invest in a luxury villa with great ROI potential. Their team’s market knowledge and attention to detail were impressive.",
+      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.",
     rating: 5,
   },
 ];
