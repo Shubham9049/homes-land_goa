@@ -54,7 +54,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white text-black font-raleway font-light fixed w-full top-0 z-50 border-b border-gray-200 transition-colors">
+    <nav className="bg-[var(--bg-color)] text-black  fixed w-full top-0 z-50  transition-colors">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex justify-between h-20 items-center">
           {/* Logo (Always visible) */}

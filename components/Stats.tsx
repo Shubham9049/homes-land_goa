@@ -80,7 +80,7 @@ const Stats: React.FC = () => {
         {/* Text Content */}
         <div className="z-10">
           <h2
-            className="text-2xl md:text-4xl font-bold text-[var(--title)] mt-2"
+            className="text-3xl md:text-5xl font-bold text-[var(--title)] mt-2"
             data-aos="fade-right"
           >
             We Help You To Find Your Dream Home
