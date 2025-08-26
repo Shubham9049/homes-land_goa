@@ -1,8 +1,11 @@
 "use client";
 
-import { FaMapMarkerAlt, FaPhoneAlt, FaClock } from "react-icons/fa";
-import { MdDeliveryDining, MdOutlineLocalDining } from "react-icons/md";
-import { RiTakeawayFill } from "react-icons/ri";
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaClock,
+  FaEnvelope,
+} from "react-icons/fa";
 import contactBanner from "../../../assets/contact.jpg";
 import { useRef, useState } from "react";
 import Navbar from "../../../components/Navbar";
@@ -34,8 +37,6 @@ export default function ContactPage() {
 
   return (
     <div className=" text-black  transition-colors">
-      {/* Toast container */}
-
       <Navbar />
 
       {/* Hero Banner */}
@@ -51,8 +52,8 @@ export default function ContactPage() {
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg md:text-2xl max-w-2xl mx-auto">
-            We&#39;d love to hear from you! Reach out with questions, feedback,
-            or reservation inquiries.
+            Get in touch with our team for property inquiries, collaborations,
+            or support.
           </p>
           <button
             onClick={scrollToNext}
@@ -74,23 +75,10 @@ export default function ContactPage() {
             Contact Information
           </h2>
           <p className="text-gray-700 dark:text-gray-300">
-            Reach out to us for any queries, bookings, or collaborations.
+            Whether you’re buying your first home, investing in real estate, or
+            exploring new projects, our team is here to assist you every step of
+            the way.
           </p>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-gray-100 dark:bg-[#1e1e1e] shadow">
-              <MdOutlineLocalDining className="text-[var(--primary-color)] text-xl" />
-              <span>Dine-in</span>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-gray-100 dark:bg-[#1e1e1e] shadow">
-              <RiTakeawayFill className="text-[var(--primary-color)] text-xl" />
-              <span>Takeaway</span>
-            </div>
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-gray-100 dark:bg-[#1e1e1e] shadow">
-              <MdDeliveryDining className="text-[var(--primary-color)] text-xl" />
-              <span>No-contact Delivery</span>
-            </div>
-          </div>
 
           <div className="flex items-start gap-3">
             <FaMapMarkerAlt className="mt-1 text-[var(--primary-color)]" />
@@ -106,8 +94,12 @@ export default function ContactPage() {
             +1 (555) 123-4567
           </p>
           <p className="flex items-center gap-3">
+            <FaEnvelope className="text-[var(--primary-color)]" />
+            info@homeslandgoa.com
+          </p>
+          <p className="flex items-center gap-3">
             <FaClock className="text-[var(--primary-color)]" />
-            Open ⋅ Closes 9 pm
+            Mon – Sat: 9:00 AM – 7:00 PM
           </p>
         </div>
 
@@ -127,7 +119,6 @@ export default function ContactPage() {
               name="email"
               placeholder="Your Email"
               value={formData.email}
-              //   onChange={handleChange}
               className="border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
               required
             />
@@ -137,7 +128,6 @@ export default function ContactPage() {
             name="subject"
             placeholder="Subject"
             value={formData.subject}
-            // onChange={handleChange}
             className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
           />
           <textarea
@@ -145,7 +135,6 @@ export default function ContactPage() {
             rows={5}
             placeholder="Your Message"
             value={formData.message}
-            // onChange={handleChange}
             className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
             required
           />
