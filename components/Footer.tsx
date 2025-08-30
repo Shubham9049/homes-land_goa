@@ -1,33 +1,35 @@
 "use client";
 
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
+import { SiX } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="bg-[var(--bg-color)] text-[var(--title)]  py-12">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto">
+    <footer className="bg-[var(--bg-color)] text-[var(--title)] pt-12">
+      {/* Main Footer Content */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto pb-10">
         {/* Brand Section */}
         <div className="md:col-span-1">
-          <Image src={logo} alt="" width={200} />
+          <Image src={logo} alt="Company Logo" width={200} />
         </div>
 
-        {/* About */}
+        {/* Quick Links */}
         <div>
-          <h3 className="text-2xl font-bold mb-3">About</h3>
+          <h3 className="text-2xl font-bold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
-              <a href="#">Our Story</a>
+              <a href="/buy">Buy</a>
             </li>
             <li>
-              <a href="#">Careers</a>
+              <a href="/rent">Rent</a>
             </li>
             <li>
-              <a href="#">Our Team</a>
+              <a href="/sell">Sell</a>
             </li>
             <li>
-              <a href="#">Resources</a>
+              <a href="/upcoming-projects">Upcoming Projects</a>
             </li>
           </ul>
         </div>
@@ -37,32 +39,16 @@ const Footer = () => {
           <h3 className="text-2xl font-bold mb-3">Support</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
-              <a href="#">FAQ</a>
+              <a href="/faq">FAQ</a>
             </li>
             <li>
-              <a href="#">Contact Us</a>
+              <a href="/contact">Contact Us</a>
             </li>
             <li>
-              <a href="#">Help Center</a>
+              <a href="/privacy-policy">Privacy Policy</a>
             </li>
             <li>
-              <a href="#">Terms of Service</a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Find Us */}
-        <div>
-          <h3 className="text-2xl font-bold mb-3">Find Us</h3>
-          <ul className="space-y-2 text-base font-medium">
-            <li>
-              <a href="#">Events</a>
-            </li>
-            <li>
-              <a href="#">Locations</a>
-            </li>
-            <li>
-              <a href="#">Newsletter</a>
+              <a href="/terms-of-service">Terms of Service</a>
             </li>
           </ul>
         </div>
@@ -71,17 +57,72 @@ const Footer = () => {
         <div>
           <h3 className=" text-2xl font-bold mb-3">Our Social</h3>
           <ul className="space-y-3 text-base font-medium">
-            <li className="flex items-center gap-2">
-              <Instagram size={18} /> Instagram
+            <li>
+              <a
+                href="https://instagram.com/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
+              >
+                <Instagram size={18} /> Instagram
+              </a>
             </li>
-            <li className="flex items-center gap-2">
-              <Facebook size={18} /> Facebook
+            <li>
+              <a
+                href="https://facebook.com/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
+              >
+                <Facebook size={18} /> Facebook
+              </a>
             </li>
-            <li className="flex items-center gap-2">
-              <Twitter size={18} /> Twitter (x)
+            <li>
+              <a
+                href="https://twitter.com/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
+              >
+                <SiX size={18} /> Twitter (X)
+              </a>
             </li>
           </ul>
         </div>
+
+        {/* Contact */}
+        <div>
+          <h3 className="text-2xl font-bold mb-3">Contact</h3>
+          <ul className="space-y-3 text-base font-medium">
+            <li className="flex items-start gap-2">
+              <MapPin size={18} className="mt-1" />
+              123 Main Street, Downtown District, <br /> Springfield, CA 90210
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail size={18} /> info@homeslandgoa.com
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone size={18} /> +1 (555) 123-4567
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-300 text-center py-4 text-sm md:text-base">
+        <p>
+          © {new Date().getFullYear()} HOMES & LAND GOA. All Rights Reserved.{" "}
+          <br />
+          Made & Marketed by{" "}
+          <a
+            href="https://www.bigwigmediadigital.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[var(--primary-color)] font-semibold hover:underline"
+          >
+            Bigwig Media Digital
+          </a>
+        </p>
       </div>
     </footer>
   );

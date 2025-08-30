@@ -15,12 +15,10 @@ const HelpSection = () => {
       {/* Support Options */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-6 mb-10 text-[var(--primary-color)] font-medium">
         <div className="flex items-center gap-2">
-          <MessageCircle className="w-5 h-5" />
-          <span>Chat live with our support team</span>
-        </div>
-        <div className="flex items-center gap-2">
           <HelpCircle className="w-5 h-5" />
-          <span>Browse our FAQ</span>
+          <span>
+            <a href="/faq">Browse our FAQ</a>
+          </span>
         </div>
       </div>
 

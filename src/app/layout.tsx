@@ -24,6 +24,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <style>{`
+          body > .skiptranslate {
+            display: none;
+          }
+          .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+          }
+          body {
+            top: 0px !important;
+          }
+          @media print {
+            #google_translate_element {
+              display: none;
+            }
+          }
+        `}</style>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

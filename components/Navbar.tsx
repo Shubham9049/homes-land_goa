@@ -39,7 +39,7 @@ const Navbar = () => {
     { label: "Upcoming Projects", path: "/upcoming_properties" },
     { label: "Blogs", path: "/blog" },
     { label: "About Us", path: "/about" },
-    { label: "Contact Us", path: "/contact" },
+    { label: "Contact Us", path: "/contacts" },
   ];
 
   useEffect(() => {
