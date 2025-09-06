@@ -96,13 +96,18 @@ const Footer = () => {
           <ul className="space-y-3 text-base font-medium">
             <li className="flex items-start gap-2">
               <MapPin size={18} className="mt-1" />
-              123 Main Street, Downtown District, <br /> Springfield, CA 90210
+              Casa Lotus, H/No. 4/213 A, Porba Vaddo, <br /> Calangute 403516
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={18} /> info@homeslandgoa.com
+              <a
+                href="mailto:info@homesandlandgoa.com"
+                className="flex items-center gap-2 "
+              >
+                <Mail size={18} /> info@homesandlandgoa.com
+              </a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={18} /> +1 (555) 123-4567
+              <Phone size={18} /> +91 96238 58108
             </li>
           </ul>
         </div>

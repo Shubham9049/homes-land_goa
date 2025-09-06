@@ -83,24 +83,22 @@ export default function ContactPage() {
           <div className="flex items-start gap-3">
             <FaMapMarkerAlt className="mt-1 text-[var(--primary-color)]" />
             <span>
-              123 Main Street, Downtown District, <br />
-              Springfield, California 90210
+              Casa Lotus, H/No. 4/213 A, Porba Vaddo,
               <br />
-              <span className="text-sm text-gray-500">Near Central Plaza</span>
+              Calangute 403516
             </span>
           </div>
           <p className="flex items-center gap-3">
             <FaPhoneAlt className="text-[var(--primary-color)]" />
-            +1 (555) 123-4567
+            +91 96238 58108
           </p>
-          <p className="flex items-center gap-3">
-            <FaEnvelope className="text-[var(--primary-color)]" />
-            info@homeslandgoa.com
-          </p>
-          <p className="flex items-center gap-3">
-            <FaClock className="text-[var(--primary-color)]" />
-            Mon – Sat: 9:00 AM – 7:00 PM
-          </p>
+
+          <a href="mailto:info@homesandlandgoa.com">
+            <p className="flex items-center gap-3">
+              <FaEnvelope size={18} className="text-[var(--primary-color)]" />{" "}
+              info@homesandlandgoa.com
+            </p>
+          </a>
         </div>
 
         {/* Right form */}
