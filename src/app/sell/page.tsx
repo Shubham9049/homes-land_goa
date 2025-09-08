@@ -187,11 +187,11 @@ function Sell() {
             </p>
             <div className="flex items-center gap-3">
               <Phone className="text-[var(--title)]" />
-              <span className="text-lg">+91 1234567890</span>
+              <span className="text-lg">+91 96238 58108</span>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="text-[var(--title)]" />
-              <span className="text-lg">sales@example.com</span>
+              <span className="text-lg">info@homesandlandgoa.com</span>
             </div>
           </div>
 
