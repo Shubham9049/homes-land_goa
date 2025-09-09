@@ -100,6 +100,7 @@ export default function BuyDetailsPage() {
             {details.googleMapUrl && (
               <div>
                 <h2 className="text-xl font-semibold mb-2">Location</h2>
+
                 <iframe
                   src={details.googleMapUrl}
                   width="100%"
@@ -115,6 +116,17 @@ export default function BuyDetailsPage() {
 
           {/* Right Column - Highlights, Features, Nearby */}
           <div className="space-y-6">
+            {/* Description */}
+            {details.description && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-3">
+                  About this property
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  {details.description}
+                </p>
+              </div>
+            )}
             {details.highlights && (
               <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
                 <h2 className="text-lg font-semibold mb-2">Highlights</h2>
@@ -149,16 +161,6 @@ export default function BuyDetailsPage() {
             )}
           </div>
         </div>
-
-        {/* Description */}
-        {details.description && (
-          <div className="mt-8">
-            <h2 className="text-2xl font-semibold mb-3">About this property</h2>
-            <p className="text-gray-700 leading-relaxed">
-              {details.description}
-            </p>
-          </div>
-        )}
       </main>
 
       <Footer />
