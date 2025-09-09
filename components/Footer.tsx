@@ -4,6 +4,7 @@ import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import { SiX } from "react-icons/si";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -20,16 +21,16 @@ const Footer = () => {
           <h3 className="text-2xl font-bold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
-              <a href="/buy">Buy</a>
+              <Link href="/buy">Buy</Link>
             </li>
             <li>
-              <a href="/rent">Rent</a>
+              <Link href="/rent">Rent</Link>
             </li>
             <li>
-              <a href="/sell">Sell</a>
+              <Link href="/sell">Sell</Link>
             </li>
             <li>
-              <a href="/upcoming-projects">Upcoming Projects</a>
+              <Link href="/upcoming-projects">Upcoming Projects</Link>
             </li>
           </ul>
         </div>
@@ -39,16 +40,16 @@ const Footer = () => {
           <h3 className="text-2xl font-bold mb-3">Support</h3>
           <ul className="space-y-2 text-base font-medium">
             <li>
-              <a href="/faq">FAQ</a>
+              <Link href="/faq">FAQ</Link>
             </li>
             <li>
-              <a href="/contact">Contact Us</a>
+              <Link href="/contact">Contact Us</Link>
             </li>
             <li>
-              <a href="/privacy-policy">Privacy Policy</a>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </li>
             <li>
-              <a href="/terms-of-service">Terms of Service</a>
+              <Link href="/terms-of-service">Terms of Service</Link>
             </li>
           </ul>
         </div>
@@ -58,34 +59,34 @@ const Footer = () => {
           <h3 className=" text-2xl font-bold mb-3">Our Social</h3>
           <ul className="space-y-3 text-base font-medium">
             <li>
-              <a
+              <Link
                 href="https://instagram.com/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
               >
                 <Instagram size={18} /> Instagram
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="https://facebook.com/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
               >
                 <Facebook size={18} /> Facebook
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="https://twitter.com/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 cursor-pointer hover:text-[var(--primary-color)]"
               >
                 <SiX size={18} /> Twitter (X)
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -99,12 +100,12 @@ const Footer = () => {
               Casa Lotus, H/No. 4/213 A, Porba Vaddo, <br /> Calangute 403516
             </li>
             <li className="flex items-center gap-2">
-              <a
+              <Link
                 href="mailto:info@homesandlandgoa.com"
                 className="flex items-center gap-2 "
               >
                 <Mail size={18} /> info@homesandlandgoa.com
-              </a>
+              </Link>
             </li>
             <li className="flex items-center gap-2">
               <Phone size={18} /> +91 96238 58108
@@ -119,14 +120,14 @@ const Footer = () => {
           © {new Date().getFullYear()} HOMES & LAND GOA. All Rights Reserved.{" "}
           <br />
           Made & Marketed by{" "}
-          <a
+          <Link
             href="https://www.bigwigmediadigital.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--primary-color)] font-semibold hover:underline"
           >
             Bigwig Media Digital
-          </a>
+          </Link>
         </p>
       </div>
     </footer>
