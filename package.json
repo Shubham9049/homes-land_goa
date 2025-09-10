@@ -21,7 +21,8 @@
     "react-quill-new": "^3.6.0",
     "react-slick": "^0.31.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "yet-another-react-lightbox": "^3.25.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
