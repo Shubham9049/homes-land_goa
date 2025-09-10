@@ -4,9 +4,29 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface PropertyFormProps {
-  property?: any; // For edit, undefined for add
+  property?: PropertyData; // For edit, undefined for new add
   onClose: () => void;
   onSuccess: () => void;
+}
+
+interface PropertyData {
+  title: string;
+  slug: string;
+  description: string;
+  type: string;
+  purpose: string;
+  location: string;
+  price: number | string;
+  bedrooms: number | string;
+  bathrooms: number | string;
+  areaSqft: number | string;
+  highlights: string[];
+  featuresAmenities: string[];
+  nearby: string[];
+  extraHighlights: string[];
+  googleMapUrl: string;
+  videoLink: string;
+  images: File[] | string[];
 }
 
 export default function PropertyForm({
@@ -14,7 +34,7 @@ export default function PropertyForm({
   onClose,
   onSuccess,
 }: PropertyFormProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PropertyData>({
     title: "",
     slug: "",
     description: "",
@@ -25,25 +45,24 @@ export default function PropertyForm({
     bedrooms: "",
     bathrooms: "",
     areaSqft: "",
-    highlights: [] as string[],
-    featuresAmenities: [] as string[],
-    nearby: [] as string[],
-    extraHighlights: [] as string[],
+    highlights: [],
+    featuresAmenities: [],
+    nearby: [],
+    extraHighlights: [],
     googleMapUrl: "",
     videoLink: "",
-    images: [] as File[],
+    images: [],
   });
 
   useEffect(() => {
     if (property) {
-      // Populate form for edit
       setFormData({
         ...property,
         price: property.price || "",
         bedrooms: property.bedrooms || "",
         bathrooms: property.bathrooms || "",
         areaSqft: property.areaSqft || "",
-        images: [], // Images will be uploaded separately
+        images: [], // New images to be uploaded
       });
     }
   }, [property]);
@@ -57,27 +76,30 @@ export default function PropertyForm({
 
   const handleArrayChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: string,
+    field: keyof Omit<PropertyData, "images">,
     index: number
   ) => {
-    const newArray = [...(formData as any)[field]];
+    const newArray = [...(formData[field] as string[])];
     newArray[index] = e.target.value;
     setFormData((prev) => ({ ...prev, [field]: newArray }));
   };
 
-  const addArrayField = (field: string) => {
-    const newArray = [...(formData as any)[field], ""];
+  const addArrayField = (field: keyof Omit<PropertyData, "images">) => {
+    const newArray = [...(formData[field] as string[]), ""];
     setFormData((prev) => ({ ...prev, [field]: newArray }));
   };
 
-  const removeArrayField = (field: string, index: number) => {
-    const newArray = [...(formData as any)[field]];
+  const removeArrayField = (
+    field: keyof Omit<PropertyData, "images">,
+    index: number
+  ) => {
+    const newArray = [...(formData[field] as string[])];
     newArray.splice(index, 1);
     setFormData((prev) => ({ ...prev, [field]: newArray }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files: FileList | null = e.target.files;
+    const files = e.target.files;
     if (files) {
       setFormData((prev) => ({ ...prev, images: Array.from(files) }));
     }
@@ -88,17 +110,18 @@ export default function PropertyForm({
 
     try {
       const data = new FormData();
+
       for (const key in formData) {
-        if (Array.isArray((formData as any)[key])) {
-          ((formData as any)[key] as string[]).forEach((item) =>
-            data.append(key, item)
-          );
-        } else if (key === "images") {
-          (formData.images as File[]).forEach((file) =>
-            data.append("images", file)
-          );
+        const value = formData[key as keyof PropertyData];
+
+        if (Array.isArray(value)) {
+          if (key === "images") {
+            (value as File[]).forEach((file) => data.append("images", file));
+          } else {
+            (value as string[]).forEach((item) => data.append(key, item));
+          }
         } else {
-          data.append(key, (formData as any)[key]);
+          data.append(key, value as string);
         }
       }
 
@@ -106,9 +129,7 @@ export default function PropertyForm({
         await axios.put(
           `http://localhost:8000/property/${property.slug}`,
           data,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
         await axios.post("http://localhost:8000/property", data, {
@@ -116,7 +137,7 @@ export default function PropertyForm({
         });
       }
 
-      onSuccess(); // refresh list
+      onSuccess();
       onClose();
     } catch (error) {
       console.error("Failed to submit property", error);
@@ -216,7 +237,7 @@ export default function PropertyForm({
           value={formData.areaSqft}
           onChange={handleChange}
           placeholder="Area (sqft)"
-          className="rounded p-2 border border-gray-300 "
+          className="rounded p-2 border border-gray-300"
         />
       </div>
 
@@ -225,40 +246,56 @@ export default function PropertyForm({
         <input type="file" multiple onChange={handleFileChange} />
       </div>
 
-      {/* Arrays like highlights */}
       {["highlights", "featuresAmenities", "nearby", "extraHighlights"].map(
         (field) => (
           <div key={field}>
-            <label className="block">{field}</label>
-            {(formData as any)[field].map((item: string, index: number) => (
-              <div key={index} className="flex gap-2 mb-1">
+            <label className="block font-medium mt-4">{field}</label>
+
+            {(
+              formData[field as keyof Omit<PropertyData, "images">] as string[]
+            ).map((item, index) => (
+              <div key={index} className="flex gap-2 mb-2">
                 <input
                   type="text"
                   value={item}
-                  onChange={(e) => handleArrayChange(e, field, index)}
-                  className="rounded p-1 flex-1 border border-gray-300"
+                  onChange={(e) =>
+                    handleArrayChange(
+                      e,
+                      field as keyof Omit<PropertyData, "images">,
+                      index
+                    )
+                  }
+                  className="rounded p-2 flex-1 border border-gray-300"
                 />
                 <button
                   type="button"
-                  onClick={() => removeArrayField(field, index)}
-                  className="bg-red-500 text-white px-2 rounded"
+                  onClick={() =>
+                    removeArrayField(
+                      field as keyof Omit<PropertyData, "images">,
+                      index
+                    )
+                  }
+                  className="bg-red-500 text-white px-3 rounded"
                 >
-                  X
+                  Remove
                 </button>
               </div>
             ))}
+
             <button
               type="button"
-              onClick={() => addArrayField(field)}
-              className="bg-blue-500 text-white px-2 rounded mt-1 border border-gray-300"
+              onClick={() =>
+                addArrayField(field as keyof Omit<PropertyData, "images">)
+              }
+              className="bg-blue-500 text-white px-3 rounded mt-2"
             >
-              + Add
+              + Add {field}
             </button>
           </div>
         )
       )}
 
-      <div className="flex justify-end gap-2 mt-4">
+      <div className="flex justify-end gap-4 mt-6">
         <button
           type="button"
           onClick={onClose}
