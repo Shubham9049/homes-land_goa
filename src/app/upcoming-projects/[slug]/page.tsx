@@ -31,6 +31,7 @@ interface Property {
   featuresAmenities: string[];
   extraHighlights: string[];
   description: string;
+  videoLink?: string;
   googleMapUrl?: string;
 }
 
@@ -47,6 +48,7 @@ export default function BuyDetails() {
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((err) => {

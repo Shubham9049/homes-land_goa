@@ -10,6 +10,7 @@ import {
   ShieldQuestionMark,
   Menu,
   X,
+  Building2,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "../../../assets/logo.png";
@@ -25,6 +26,7 @@ export default function AdminDashboardLayout({
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Blogs", href: "/adminblogs", icon: FileText },
+    { name: "Properties", href: "/properties", icon: Building2 },
   ];
 
   return (

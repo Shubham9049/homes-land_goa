@@ -167,7 +167,7 @@ export default function BuyPage() {
                   )}
 
                   <button
-                    onClick={() => router.push(`/buy/${p.slug}`)}
+                    onClick={() => router.push(`/upcoming/${p.slug}`)}
                     className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
                   >
                     View Details
