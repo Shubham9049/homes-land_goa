@@ -260,9 +260,19 @@ export default function PropertiesAdmin() {
             </h2>
 
             <PropertyForm
-              property={editProperty}
+              property={
+                editProperty
+                  ? {
+                      ...editProperty,
+                      price: editProperty.price ?? "",
+                      bedrooms: editProperty.bedrooms ?? "",
+                      bathrooms: editProperty.bathrooms ?? "",
+                      areaSqft: editProperty.areaSqft ?? "",
+                    }
+                  : undefined
+              }
               onClose={() => setIsFormModalOpen(false)}
-              onSuccess={fetchProperties} // Refresh the table
+              onSuccess={fetchProperties}
             />
           </div>
         </div>
