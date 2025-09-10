@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { MapPin, Home } from "lucide-react";
 import banner from "../../../assets/buybanner.webp";
@@ -9,26 +9,41 @@ import Footer from "../../../components/Footer";
 import HelpSection from "../../../components/HelpSection";
 import { useRouter } from "next/navigation";
 
-// Import JSON directly
-import propertiesData from "../../../data/properties.json";
-
 interface Property {
-  id: string;
+  _id: string;
   title: string;
-  type: string;
-  location: string;
-  price: number | string;
-  thumbnail: string;
-  bedrooms?: number;
+  slug: string;
+  type?: string;
+  location?: string;
+  price?: number | null;
+  images: string[];
+  purpose?: string;
 }
 
-export default function UpcomingPage() {
+export default function BuyPage() {
   const [selectedType, setSelectedType] = useState("All");
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
   const buyRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  // 👇 only take "buy" properties from JSON
-  const properties: Property[] = propertiesData.upcoming || [];
+  // Fetch properties from backend
+  useEffect(() => {
+    fetch("http://localhost:8000/property")
+      .then((res) => res.json())
+      .then((data) => {
+        // filter only BUY properties
+        const buyProperties = data.filter(
+          (p: Property) => p.purpose?.toLowerCase() === "upcoming"
+        );
+        setProperties(buyProperties);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
   const filtered =
     selectedType === "All"
@@ -42,11 +57,6 @@ export default function UpcomingPage() {
         buyRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
-  };
-
-  const handleRedirect = (title: string) => {
-    const slug = title.toLowerCase().replace(/\s+/g, "-");
-    router.push(`/buy/${slug}`);
   };
 
   return (
@@ -94,63 +104,79 @@ export default function UpcomingPage() {
 
       {/* Property List */}
       <div ref={buyRef} className="py-12 bg-[var(--bg-color)]">
-        <div className="w-11/12 md:w-5/6 mx-auto">
-          {filtered.length === 0 ? (
-            <div className="text-center py-20 text-gray-500">
-              <h2 className="text-2xl font-semibold mb-2">
-                No properties available
-              </h2>
-              <p>
-                Currently, we don’t have any properties listed for{" "}
-                <span className="font-medium">{selectedType}</span>. <br />
-                Please check back soon or explore other categories.
-              </p>
-            </div>
-          ) : (
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 p-6 flex-grow">
-              {filtered.map((p) => (
-                <div
-                  key={p.id}
-                  className="mb-6 break-inside-avoid rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
-                >
-                  <div className="relative">
+        {loading ? (
+          <p className="text-center py-20 text-gray-500">
+            Loading properties...
+          </p>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-20 text-gray-500 col-span-full">
+            <h2 className="text-2xl font-semibold mb-2">
+              No properties available
+            </h2>
+            <p>
+              Currently, we don’t have any{" "}
+              <span className="font-medium">Buy</span> properties listed for{" "}
+              <span className="font-medium">{selectedType}</span>.
+              <br />
+              Please check back soon or explore other categories.
+            </p>
+          </div>
+        ) : (
+          <div className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((p) => (
+              <div
+                key={p._id}
+                className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
+              >
+                {/* Image */}
+                <div className="relative h-64 w-full">
+                  {p.images?.[0] ? (
                     <Image
-                      src={p.thumbnail}
+                      src={p.images[0]}
                       alt={p.title}
-                      width={500}
-                      height={400}
-                      className="w-full h-64 object-cover"
+                      fill
+                      className="object-cover"
+                      unoptimized
                     />
-                    <span className="absolute top-3 right-3 bg-[var(--title)] text-white px-3 py-1 text-sm rounded-full">
-                      ₹{" "}
-                      {typeof p.price === "number"
-                        ? p.price.toLocaleString()
-                        : p.price}
-                    </span>
-                  </div>
-                  <div className="p-4 bg-white">
-                    <h3 className="font-bold text-[var(--title)] text-lg">
-                      {p.title}
-                    </h3>
+                  ) : (
+                    <div className="h-64 flex items-center justify-center bg-gray-100 text-gray-400">
+                      No Image
+                    </div>
+                  )}
+                </div>
+
+                {/* Info */}
+                <div className="p-4">
+                  <h3 className="font-bold text-[var(--title)] text-lg line-clamp-1">
+                    {p.title}
+                  </h3>
+                  {p.location && (
                     <p className="flex items-center text-[var(--primary-color)] text-sm mt-1">
                       <MapPin size={16} className="mr-1" /> {p.location}
                     </p>
-                    <p className="flex items-center text-[var(--primary-color)] text-sm mt-1">
-                      <Home size={16} className="mr-1" /> {p.type}{" "}
-                      {p.bedrooms ? `• ${p.bedrooms} BHK` : ""}
+                  )}
+                  {p.price !== null && (
+                    <p className="mt-1 font-semibold text-gray-800">
+                      ₹ {p.price?.toLocaleString()}
                     </p>
-                    <button
-                      onClick={() => handleRedirect(p.title)}
-                      className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
-                    >
-                      View Details
-                    </button>
-                  </div>
+                  )}
+                  {p.type && (
+                    <p className="mt-1 text-sm text-gray-600 flex items-center">
+                      <Home size={16} className="mr-1" /> {p.type}
+                    </p>
+                  )}
+
+                  <button
+                    onClick={() => router.push(`/buy/${p.slug}`)}
+                    className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
+                  >
+                    View Details
+                  </button>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <HelpSection />
