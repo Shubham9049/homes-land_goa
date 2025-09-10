@@ -50,7 +50,7 @@ export default function BuyDetails() {
 
   useEffect(() => {
     if (!slug) return;
-    fetch(`http://localhost:8000/property/${slug}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property/${slug}`)
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);

@@ -29,7 +29,7 @@ export default function BuyPage() {
 
   // Fetch properties from backend
   useEffect(() => {
-    fetch("http://localhost:8000/property")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`)
       .then((res) => res.json())
       .then((data) => {
         // filter only BUY properties
