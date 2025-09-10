@@ -10,7 +10,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Star,
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -42,7 +41,6 @@ export default function BuyDetails() {
   const [showGallery, setShowGallery] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
-  // Fetch property by slug
   useEffect(() => {
     if (!slug) return;
     fetch(`http://localhost:8000/property/${slug}`)
@@ -74,61 +72,75 @@ export default function BuyDetails() {
       <Navbar />
 
       {/* HERO IMAGE */}
-      <div className="relative w-full h-[75vh]">
+      <div className="relative w-full h-[70vh]">
         {property.images[0] && (
           <Image
             src={property.images[0]}
             alt={property.title}
             fill
+            priority
             className="object-cover"
           />
         )}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/50 px-6 py-3 rounded-xl text-center text-white">
-          <h1 className="text-3xl md:text-4xl font-bold">{property.title}</h1>
-          {property.location && (
-            <p className="text-lg mt-1">{property.location}</p>
-          )}
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
       </div>
 
-      <div className="w-11/12 md:w-5/6 mx-auto px-4 py-16 space-y-12">
-        {/* PRICE + INFO */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          {property.price && (
-            <p className="text-3xl font-semibold text-[var(--title)]">
-              ₹ {property.price.toLocaleString()}
+      <div className="w-11/12 md:w-5/6 mx-auto px-4 py-16 space-y-16">
+        {/* MAIN INFO SECTION */}
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* LEFT SIDE: TITLE + DETAILS */}
+          <div className="space-y-6">
+            <h1 className="text-4xl font-bold">{property.title}</h1>
+            {property.location && (
+              <p className="flex items-center gap-2 text-lg text-gray-600 dark:text-gray-300">
+                <MapPin size={18} /> {property.location}
+              </p>
+            )}
+
+            <div className="flex flex-wrap gap-3">
+              {property.type && (
+                <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg shadow-sm">
+                  <Home size={18} /> {property.type}
+                </span>
+              )}
+              {property.price && (
+                <span className="text-2xl font-semibold text-[var(--title)]">
+                  ₹ {property.price.toLocaleString()}
+                </span>
+              )}
+              {property.bedrooms && (
+                <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg shadow-sm">
+                  <BedDouble size={18} /> {property.bedrooms} Bedrooms
+                </span>
+              )}
+              {property.bathrooms && (
+                <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg shadow-sm">
+                  🛁 {property.bathrooms} Bathrooms
+                </span>
+              )}
+              {property.areaSqft && (
+                <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg shadow-sm">
+                  📐 {property.areaSqft} Sqft
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: DESCRIPTION */}
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Description</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+              {property.description}
             </p>
-          )}
-          <div className="flex flex-wrap gap-3">
-            {property.type && (
-              <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm">
-                <Home size={18} /> {property.type}
-              </span>
-            )}
-            {property.bedrooms && (
-              <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm">
-                <BedDouble size={18} /> {property.bedrooms} Bedrooms
-              </span>
-            )}
-            {property.bathrooms && (
-              <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm">
-                🛁 {property.bathrooms} Bathrooms
-              </span>
-            )}
-            {property.areaSqft && (
-              <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm">
-                📐 {property.areaSqft} Sqft
-              </span>
-            )}
           </div>
         </div>
 
         {/* IMAGE PREVIEW GALLERY */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {property.images.slice(1, 4).map((img, idx) => (
             <div
               key={idx}
-              className="relative w-full h-44 rounded-xl overflow-hidden shadow-md"
+              className="relative w-full h-48 rounded-xl overflow-hidden shadow-md"
             >
               <Image
                 src={img}
@@ -141,7 +153,7 @@ export default function BuyDetails() {
           {property.images.length > 4 && (
             <button
               onClick={() => setShowGallery(true)}
-              className="relative w-full h-44 rounded-xl overflow-hidden shadow-md bg-black text-white flex items-center justify-center text-lg font-medium"
+              className="relative w-full h-48 rounded-xl overflow-hidden shadow-md bg-black/80 text-white flex items-center justify-center text-lg font-medium"
             >
               + {property.images.length - 3} More
             </button>
@@ -151,31 +163,14 @@ export default function BuyDetails() {
         {/* HIGHLIGHTS */}
         {property.highlights?.length > 0 && (
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Highlights</h2>
+            <h2 className="text-2xl font-semibold mb-6">Highlights</h2>
             <div className="flex flex-wrap gap-3">
               {property.highlights.map((h, idx) => (
                 <span
                   key={idx}
-                  className="bg-[var(--title)] text-white px-4 py-2 rounded-lg shadow-md"
+                  className="bg-[var(--title)] text-white px-5 py-2 rounded-full shadow-md"
                 >
                   {h}
-                </span>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* NEARBY */}
-        {property.nearby?.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Nearby</h2>
-            <div className="flex flex-wrap gap-3">
-              {property.nearby.map((n, idx) => (
-                <span
-                  key={idx}
-                  className="bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm"
-                >
-                  {n}
                 </span>
               ))}
             </div>
@@ -185,31 +180,48 @@ export default function BuyDetails() {
         {/* FEATURES + AMENITIES */}
         {property.featuresAmenities?.length > 0 && (
           <section>
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-6">
               Features & Amenities
             </h2>
-            <ul className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {property.featuresAmenities.map((f, idx) => (
                 <li
                   key={idx}
-                  className="bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg flex items-center gap-2"
+                  className="bg-gray-50 dark:bg-gray-900 px-4 py-3 rounded-lg flex items-center gap-2 shadow-sm"
                 >
-                  <Star size={16} className="text-yellow-500" /> {f}
+                  ⭐ {f}
                 </li>
               ))}
             </ul>
           </section>
         )}
 
+        {/* NEARBY */}
+        {property.nearby?.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Nearby</h2>
+            <div className="flex flex-wrap gap-3">
+              {property.nearby.map((n, idx) => (
+                <span
+                  key={idx}
+                  className="bg-gray-100 dark:bg-gray-800 px-5 py-2 rounded-full shadow-sm"
+                >
+                  {n}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* EXTRA HIGHLIGHTS */}
         {property.extraHighlights?.length > 0 && (
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Extra Highlights</h2>
+            <h2 className="text-2xl font-semibold mb-6">Extra Highlights</h2>
             <div className="flex flex-wrap gap-3">
               {property.extraHighlights.map((e, idx) => (
                 <span
                   key={idx}
-                  className="bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded-lg"
+                  className="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full"
                 >
                   {e}
                 </span>
@@ -218,24 +230,16 @@ export default function BuyDetails() {
           </section>
         )}
 
-        {/* DESCRIPTION */}
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Description</h2>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            {property.description}
-          </p>
-        </section>
-
         {/* GOOGLE MAP */}
         {property.googleMapUrl && (
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Location</h2>
+            <h2 className="text-2xl font-semibold mb-6">Location</h2>
             <iframe
               src={property.googleMapUrl}
               width="100%"
-              height="400"
+              height="450"
               loading="lazy"
-              className="rounded-xl shadow-md border-0"
+              className="rounded-2xl shadow-md border-0"
             ></iframe>
           </section>
         )}
@@ -243,10 +247,10 @@ export default function BuyDetails() {
 
       {/* GALLERY MODAL */}
       {showGallery && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col z-50 items-center justify-center">
+        <div className="fixed inset-0 bg-black/95 flex flex-col z-50 items-center justify-center">
           <button
             onClick={() => setShowGallery(false)}
-            className="absolute top-4 right-4 text-white text-2xl"
+            className="absolute top-6 right-6 text-white text-2xl"
           >
             <X size={32} />
           </button>
