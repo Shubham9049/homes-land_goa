@@ -1,71 +1,87 @@
 {
   "buy": [
     {
-      "id": "buy-1",
-      "title": "Luxury Beachfront Villa",
-      "type": "Villa",
-      "location": "North Goa, India",
-      "price": 15000000,
-      "thumbnail": "/images/buy/villa1-thumb.jpg",
-      "details": {
-        "images": [
-          "/images/buy/villa1-1.jpg",
-          "/images/buy/villa1-2.jpg",
-          "/images/buy/villa1-3.jpg"
-        ],
-        "videos": ["/videos/buy/villa1.mp4"],
-        "googleMapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492042.0654876885!2d73.35582377450497!3d15.533914611664743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfc0ed52faa031%3A0x1bcd0a8c7ed54dd0!2sNorth%20Goa%2C%20Goa!5e0!3m2!1sen!2sin!4v1757317218922!5m2!1sen!2sin",
-        "highlights": ["Sea View", "Private Pool", "Modern Architecture"],
-        "nearby": ["Candolim Beach", "Airport 20km", "Shopping Mall"],
-        "features": ["3 Bedrooms", "2 Bathrooms", "Garden"],
-        "amenities": ["Clubhouse", "Swimming Pool", "24x7 Security"],
-        "description": "A stunning beachfront villa in North Goa with private pool and modern interiors, perfect for luxury living."
-      }
-    },
-    {
       "id": "buy-2",
-      "title": "Furnished Apartment in City Center",
-      "type": "Apartment",
-      "location": "Panaji, Goa",
-      "price": 40000,
-      "thumbnail": "/images/rent/apartment1-thumb.jpg",
+      "title": "Ultra-Luxurious 5BHK Villa in the Heart of Calangute, Goa",
+      "type": "Villa",
+      "location": "Calangute, North Goa, India",
+      "price": "",
+      "thumbnail": "/assets/buy/project1/image (29).jpeg",
       "details": {
         "images": [
-          "/images/rent/apartment1-1.jpg",
-          "/images/rent/apartment1-2.jpg"
+          "/assets/buy/project1/image (1).jpeg",
+          "/assets/buy/project1/image (2).jpeg",
+          "/assets/buy/project1/image (3).jpeg",
+          "/assets/buy/project1/image (4).jpeg",
+          "/assets/buy/project1/image (5).jpeg",
+          "/assets/buy/project1/image (6).jpeg",
+          "/assets/buy/project1/image (7).jpeg",
+          "/assets/buy/project1/image (8).jpeg",
+          "/assets/buy/project1/image (9).jpeg",
+          "/assets/buy/project1/image (10).jpeg",
+          "/assets/buy/project1/image (11).jpeg",
+          "/assets/buy/project1/image (12).jpeg",
+          "/assets/buy/project1/image (13).jpeg",
+          "/assets/buy/project1/image (14).jpeg",
+          "/assets/buy/project1/image (15).jpeg",
+          "/assets/buy/project1/image (16).jpeg",
+          "/assets/buy/project1/image (17).jpeg",
+          "/assets/buy/project1/image (18).jpeg",
+          "/assets/buy/project1/image (19).jpeg",
+          "/assets/buy/project1/image (20).jpeg",
+          "/assets/buy/project1/image (21).jpeg",
+          "/assets/buy/project1/image (22).jpeg",
+          "/assets/buy/project1/image (23).jpeg",
+          "/assets/buy/project1/image (24).jpeg",
+          "/assets/buy/project1/image (25).jpeg",
+          "/assets/buy/project1/image (26).jpeg",
+          "/assets/buy/project1/image (27).jpeg",
+          "/assets/buy/project1/image (28).jpeg",
+          "/assets/buy/project1/image (29).jpeg",
+          "/assets/buy/project1/image (30).jpeg",
+          "/assets/buy/project1/image (31).jpeg",
+          "/assets/buy/project1/image (32).jpeg",
+          "/assets/buy/project1/image (33).jpeg",
+          "/assets/buy/project1/image (34).jpeg",
+          "/assets/buy/project1/image (35).jpeg",
+          "/assets/buy/project1/image (36).jpeg",
+          "/assets/buy/project1/image (37).jpeg",
+          "/assets/buy/project1/image (38).jpeg",
+          "/assets/buy/project1/image (39).jpeg",
+          "/assets/buy/project1/image (40).jpeg",
+          "/assets/buy/project1/image (41).jpeg",
+          "/assets/buy/project1/image (42).jpeg",
+          "/assets/buy/project1/image (43).jpeg"
         ],
-        "videos": [],
-        "googleMapUrl": "https://maps.google.com/?q=Panaji",
-        "highlights": ["Fully Furnished", "Close to Market", "Balcony View"],
-        "nearby": ["Mall", "Hospital", "School"],
-        "features": ["2 Bedrooms", "1 Living Room", "1 Kitchen"],
-        "amenities": ["Lift", "Parking", "Power Backup"],
-        "description": "A fully furnished 2BHK apartment located in the heart of Panaji with easy access to markets and schools."
-      }
-    },
-    {
-      "id": "buy-3",
-      "title": "Skyline Residency Penthouse",
-      "type": "Penthouse",
-      "location": "South Goa",
-      "price": "Launching Soon",
-      "thumbnail": "/images/upcoming/project1-thumb.jpg",
-      "details": {
-        "images": [
-          "/images/upcoming/project1-1.jpg",
-          "/images/upcoming/project1-2.jpg"
-        ],
-        "videos": [],
-        "googleMapUrl": "https://maps.google.com/?q=South+Goa",
-        "highlights": [
-          "Pre-launch Offer",
-          "Smart Homes",
-          "Eco-friendly Design"
-        ],
-        "nearby": ["Beach 5km", "Metro Station", "Airport 30km"],
-        "features": ["1-3 BHK Options", "Smart Security", "Rooftop Garden"],
-        "amenities": ["Clubhouse", "Gym", "Swimming Pool", "Kids Play Area"],
-        "description": "Upcoming luxury penthouse project with smart home features and eco-friendly design. Pre-launch bookings open soon."
+        "videos": ["/videos/buy/calangute-villa.mp4"],
+        "googleMapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492042.0654876885!2d73.7641!3d15.5449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfc0dbfdf98b63%3A0xa29e99f79a35ac4!2sCalangute%2C%20Goa!5e0!3m2!1sen!2sin!4v1757317218922!5m2!1sen!2sin",
+        "content": {
+          "intro": "An extraordinary opportunity to own one of the most prestigious villas in Goa, owned by one of India’s top-notch businessmen. Nestled in the vibrant yet peaceful locale of Calangute, this magnificent 5BHK villa redefines luxury living. Located just moments away from the beach, this property offers the perfect blend of tranquility and convenience, with every conceivable modern amenity at your disposal.",
+          "villaFeatures": [
+            "Spacious 5 Bedrooms, fully furnished with luxurious furniture, appliances, and decor.",
+            "Servant Quarters with Separate Access for up to 15 staff members.",
+            "Private Spa offering the perfect ambiance for relaxation and rejuvenation.",
+            "Dedicated Security Cabin with 24/7 surveillance and access control.",
+            "Lush Landscaping and beautifully manicured gardens."
+          ],
+          "location": "This luxury villa is situated in Calangute, one of Goa’s most sought-after and popular destinations. Strategically placed far enough from the traffic and noise, yet just a short walk to Calangute beach, dining, shopping, entertainment, and nightlife.",
+          "uniquePoints": [
+            "Exclusivity and Prestige – ownership history tied to a leading businessman.",
+            "Modern Amenities with premium furniture, appliances, and advanced security systems.",
+            "Perfect for Entertaining – spacious living areas and outdoor spaces designed for hosting."
+          ],
+          "inTheHeartOfGoa": "Despite its grandeur, this villa feels like a private retreat, offering a luxurious sanctuary close to the beach and the vibrant Goan lifestyle with its culture, history, and modernity.",
+          "keyHighlights": [
+            "5BHK fully furnished villa with premium interiors",
+            "Separate servant quarters for 15 staff members",
+            "Private spa and wellness area",
+            "Security cabin and advanced security systems",
+            "Lush green landscaped gardens",
+            "Located in Calangute, close to the beach yet far from traffic"
+          ],
+          "investmentNote": "This villa is not just a property; it’s a lifestyle investment. With Goa’s rising popularity as a tourist and real estate hub, this villa is both a luxurious home and a high-value asset with immense appreciation potential.",
+          "closingNote": "Properties like this are exceedingly rare in Goa. For discerning buyers who value luxury, privacy, and location, this villa is an unparalleled offering."
+        }
       }
     }
   ],
