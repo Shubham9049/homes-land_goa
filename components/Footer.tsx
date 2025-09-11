@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto pb-10">
         {/* Brand Section */}
         <div className="md:col-span-1">
-          <Image src={logo} alt="Company Logo" width={200} />
+          <Image src={logo} alt="Company Logo" width={150} />
         </div>
 
         {/* Quick Links */}
