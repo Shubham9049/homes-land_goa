@@ -41,7 +41,9 @@ export default function AdminBlogsPage() {
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/viewblog`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
+      );
       const data = await res.json();
       setBlogs(data);
       console.log(data);
@@ -60,9 +62,12 @@ export default function AdminBlogsPage() {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/${slug}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/${slug}`,
+        {
+          method: "DELETE",
+        }
+      );
       const json = await res.json();
       if (res.ok) {
         alert(json.msg || "Deleted successfully");
@@ -83,7 +88,7 @@ export default function AdminBlogsPage() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/${editingSlug}/image`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/${editingSlug}/image`,
         {
           method: "PATCH",
           body: formData,

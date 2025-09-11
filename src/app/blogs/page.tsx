@@ -30,7 +30,9 @@ function Blogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/viewblog`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
+        );
         const data = await res.json();
         setBlogs(data);
         console.log(data);

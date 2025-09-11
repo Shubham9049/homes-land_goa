@@ -23,7 +23,7 @@ export default function BlogDetails() {
 
   useEffect(() => {
     if (slug) {
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/${slug}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/blog/${slug}`)
         .then((res) => res.json())
         .then((data) => {
           setBlog(data);
