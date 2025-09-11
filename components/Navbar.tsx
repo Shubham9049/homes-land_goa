@@ -68,7 +68,7 @@ const Navbar = () => {
           <Link href="/" className="flex items-center">
             <Image
               src={logo}
-              alt="Mondus Logo"
+              alt="Homes and land goa Logo"
               width={100}
               height={100}
               className="w-full"
