@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import { MapPin, BedDouble, Ruler, Home } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Property {
   _id: string;
@@ -75,59 +76,60 @@ const PopularResidences = () => {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 md:w-5/6 mx-auto">
         {properties.map((house, index) => (
-          <div
-            key={house._id}
-            className="bg-[#e6cfc2] rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
-            data-aos="zoom-in-up"
-            data-aos-delay={index * 200}
-            onClick={() => router.push(`/buy/${house.slug}`)}
-          >
-            {/* Image */}
-            <div className="relative h-60 w-full">
-              {house.images?.[0] ? (
-                <Image
-                  src={house.images[0]}
-                  alt={house.title}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="h-60 flex items-center justify-center bg-gray-100 text-gray-400">
-                  No Image
-                </div>
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-grow">
-              <h3 className="font-semibold text-[var(--title)] text-lg line-clamp-1">
-                {house.title}
-              </h3>
-
-              {house.location && (
-                <div className="flex items-center text-[var(--title)] font-semibold mb-3">
-                  <MapPin className="w-5 h-5 mr-2" />
-                  {house.location}
-                </div>
-              )}
-
-              <div className="flex items-center justify-between text-[var(--title)] text-sm">
-                {house.bedrooms && (
-                  <div className="flex items-center gap-1">
-                    <BedDouble className="w-5 h-5" />
-                    <span>{house.bedrooms} Rooms</span>
-                  </div>
-                )}
-                {house.size && (
-                  <div className="flex items-center gap-1">
-                    <Ruler className="w-5 h-5" />
-                    <span>{house.size}</span>
+          <Link href={`/buy/${house.slug}`} scroll={true}>
+            <div
+              key={house._id}
+              className="bg-[#e6cfc2] rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
+              data-aos="zoom-in-up"
+              data-aos-delay={index * 200}
+            >
+              {/* Image */}
+              <div className="relative h-60 w-full">
+                {house.images?.[0] ? (
+                  <Image
+                    src={house.images[0]}
+                    alt={house.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="h-60 flex items-center justify-center bg-gray-100 text-gray-400">
+                    No Image
                   </div>
                 )}
               </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="font-semibold text-[var(--title)] text-lg line-clamp-1">
+                  {house.title}
+                </h3>
+
+                {house.location && (
+                  <div className="flex items-center text-[var(--title)] font-semibold mb-3">
+                    <MapPin className="w-5 h-5 mr-2" />
+                    {house.location}
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between text-[var(--title)] text-sm">
+                  {house.bedrooms && (
+                    <div className="flex items-center gap-1">
+                      <BedDouble className="w-5 h-5" />
+                      <span>{house.bedrooms} Rooms</span>
+                    </div>
+                  )}
+                  {house.size && (
+                    <div className="flex items-center gap-1">
+                      <Ruler className="w-5 h-5" />
+                      <span>{house.size}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

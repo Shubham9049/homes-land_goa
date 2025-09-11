@@ -49,6 +49,11 @@ export default function BuyDetails() {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (!slug) return;
     fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property/${slug}`)
       .then((res) => res.json())
