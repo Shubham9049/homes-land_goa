@@ -11,6 +11,8 @@ import PopularResidences from "../../components/PopularResidences";
 import Stats from "../../components/Stats";
 import { MapPin, User, ClipboardList, Handshake } from "lucide-react";
 import ReviewSection from "../../components/Testimonial";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
+import WhatsAppButton from "../../components/floatingBtn";
 
 const features = [
   {
@@ -96,6 +98,8 @@ function Landing() {
       <ReviewSection />
       <HelpSection />
       <Footer />
+      <WhatsAppButton />
+      <ScrollToTopButton />
     </div>
   );
 }
