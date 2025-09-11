@@ -29,7 +29,7 @@ export default function BuyPage() {
 
   // Fetch properties from backend
   useEffect(() => {
-    fetch("http://localhost:8000/property")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`)
       .then((res) => res.json())
       .then((data) => {
         // filter only BUY properties
@@ -167,7 +167,7 @@ export default function BuyPage() {
                   )}
 
                   <button
-                    onClick={() => router.push(`/upcoming/${p.slug}`)}
+                    onClick={() => router.push(`/upcoming-projects/${p.slug}`)}
                     className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
                   >
                     View Details

@@ -109,6 +109,11 @@ export default function BuyDetails() {
               <MapPin size={18} /> {property.location}
             </p>
           )}
+          {property.price && (
+            <span className="text-2xl font-semibold text-[var(--title)]">
+              ₹ {property.price.toLocaleString()}
+            </span>
+          )}
 
           <div className="flex flex-wrap gap-3 mt-4">
             {property.type && (
@@ -116,11 +121,7 @@ export default function BuyDetails() {
                 <Home size={18} /> {property.type}
               </span>
             )}
-            {property.price && (
-              <span className="text-2xl font-semibold text-[var(--title)]">
-                ₹ {property.price.toLocaleString()}
-              </span>
-            )}
+
             {property.bedrooms && (
               <span className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg shadow-sm">
                 <BedDouble size={18} /> {property.bedrooms} Bedrooms

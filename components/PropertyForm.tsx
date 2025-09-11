@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface PropertyFormProps {
-  property?: PropertyData; // For edit, undefined for new add
+  property?: PropertyData;
   onClose: () => void;
   onSuccess: () => void;
 }
@@ -26,17 +26,22 @@ interface PropertyData {
   extraHighlights: string[];
   googleMapUrl: string;
   videoLink: string;
-  images: File[] | string[];
+  images: string[];
 }
+
+type ArrayFields =
+  | "highlights"
+  | "featuresAmenities"
+  | "nearby"
+  | "extraHighlights";
 
 export default function PropertyForm({
   property,
   onClose,
   onSuccess,
 }: PropertyFormProps) {
-  const [formData, setFormData] = useState<PropertyData>({
+  const [formData, setFormData] = useState<Partial<PropertyData>>({
     title: "",
-    slug: "",
     description: "",
     type: "",
     purpose: "",
@@ -45,94 +50,107 @@ export default function PropertyForm({
     bedrooms: "",
     bathrooms: "",
     areaSqft: "",
-    highlights: [],
-    featuresAmenities: [],
-    nearby: [],
-    extraHighlights: [],
     googleMapUrl: "",
     videoLink: "",
-    images: [],
   });
+
+  const [arrayInputs, setArrayInputs] = useState<Record<ArrayFields, string>>({
+    highlights: "",
+    featuresAmenities: "",
+    nearby: "",
+    extraHighlights: "",
+  });
+
+  const [existingImages, setExistingImages] = useState<string[]>([]);
+  const [newImages, setNewImages] = useState<File[]>([]);
+  const [loading, setLoading] = useState(false); // 🔹 loader
 
   useEffect(() => {
     if (property) {
       setFormData({
-        ...property,
-        price: property.price || "",
-        bedrooms: property.bedrooms || "",
-        bathrooms: property.bathrooms || "",
-        areaSqft: property.areaSqft || "",
-        images: [], // New images to be uploaded
+        title: property.title,
+        description: property.description,
+        type: property.type,
+        purpose: property.purpose,
+        location: property.location,
+        price: property.price,
+        bedrooms: property.bedrooms,
+        bathrooms: property.bathrooms,
+        areaSqft: property.areaSqft,
+        googleMapUrl: property.googleMapUrl,
+        videoLink: property.videoLink,
       });
+
+      setArrayInputs({
+        highlights: property.highlights.join(", "),
+        featuresAmenities: property.featuresAmenities.join(", "),
+        nearby: property.nearby.join(", "),
+        extraHighlights: property.extraHighlights.join(", "),
+      });
+
+      setExistingImages(property.images || []);
     }
   }, [property]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleArrayChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof Omit<PropertyData, "images">,
-    index: number
-  ) => {
-    const newArray = [...(formData[field] as string[])];
-    newArray[index] = e.target.value;
-    setFormData((prev) => ({ ...prev, [field]: newArray }));
-  };
-
-  const addArrayField = (field: keyof Omit<PropertyData, "images">) => {
-    const newArray = [...(formData[field] as string[]), ""];
-    setFormData((prev) => ({ ...prev, [field]: newArray }));
-  };
-
-  const removeArrayField = (
-    field: keyof Omit<PropertyData, "images">,
-    index: number
-  ) => {
-    const newArray = [...(formData[field] as string[])];
-    newArray.splice(index, 1);
-    setFormData((prev) => ({ ...prev, [field]: newArray }));
+  const handleArrayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setArrayInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      setFormData((prev) => ({ ...prev, images: Array.from(files) }));
-    }
+    if (!files) return;
+    setNewImages((prev) => [...prev, ...Array.from(files)]);
+  };
+
+  const handleRemoveExistingImage = (url: string) => {
+    setExistingImages((prev) => prev.filter((img) => img !== url));
+  };
+
+  const handleRemoveNewImage = (index: number) => {
+    setNewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setLoading(true); // 🔹 start loader
     try {
       const data = new FormData();
 
-      for (const key in formData) {
-        const value = formData[key as keyof PropertyData];
-
-        if (Array.isArray(value)) {
-          if (key === "images") {
-            (value as File[]).forEach((file) => data.append("images", file));
-          } else {
-            (value as string[]).forEach((item) => data.append(key, item));
-          }
-        } else {
-          data.append(key, value as string);
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+          data.append(key, value.toString());
         }
-      }
+      });
+
+      (Object.keys(arrayInputs) as ArrayFields[]).forEach((key) => {
+        const arr = arrayInputs[key]
+          .split(",")
+          .map((i) => i.trim())
+          .filter(Boolean);
+        data.append(key, JSON.stringify(arr));
+      });
+
+      newImages.forEach((file) => data.append("images", file));
+      data.append("existingImages", JSON.stringify(existingImages));
 
       if (property) {
-        await axios.put(
-          `http://localhost:8000/property/${property.slug}`,
+        await axios.patch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/property/${property.slug}`,
           data,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
-        await axios.post("http://localhost:8000/property", data, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/property`, data, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
@@ -141,175 +159,240 @@ export default function PropertyForm({
       onClose();
     } catch (error) {
       console.error("Failed to submit property", error);
+    } finally {
+      setLoading(false); // 🔹 stop loader
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block">Title</label>
-        <input
-          type="text"
+    <form onSubmit={handleSubmit} className="space-y-6 rounded-lg shadow p-6 ">
+      {/* Title & Description */}
+      <div className="space-y-3">
+        <InputField
+          label="Title"
           name="title"
-          value={formData.title}
+          value={formData.title || ""}
           onChange={handleChange}
-          className="w-full rounded p-2 border border-gray-300"
           required
         />
+
+        <div>
+          <label className="block font-medium mb-1">Description</label>
+          <textarea
+            name="description"
+            value={formData.description || ""}
+            onChange={handleChange}
+            className="w-full rounded-lg p-3 border border-gray-300 focus:ring focus:ring-green-200"
+            rows={4}
+            required
+          />
+        </div>
       </div>
 
-      <div>
-        <label className="block">Slug</label>
-        <input
-          type="text"
-          name="slug"
-          value={formData.slug}
-          onChange={handleChange}
-          className="w-full rounded p-2 border border-gray-300"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block">Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full rounded p-2 border border-gray-300"
-          rows={4}
-          required
-        />
-      </div>
-
+      {/* Basic Info */}
       <div className="grid grid-cols-2 gap-4">
-        <input
-          type="text"
+        <InputField
           name="type"
-          value={formData.type}
-          onChange={handleChange}
           placeholder="Type"
-          className="rounded p-2 border border-gray-300"
-        />
-        <input
-          type="text"
-          name="purpose"
-          value={formData.purpose}
+          value={formData.type || ""}
           onChange={handleChange}
-          placeholder="Purpose"
-          className="rounded p-2 border border-gray-300"
         />
-        <input
-          type="text"
+
+        {/* 🔹 Purpose dropdown (light background so options visible) */}
+        <div>
+          <select
+            name="purpose"
+            value={formData.purpose || ""}
+            onChange={handleChange}
+            className="w-full rounded-lg p-3 bg-white text-black border border-gray-300 focus:ring focus:ring-green-200"
+          >
+            <option value="">Select purpose</option>
+            <option value="Buy">Buy</option>
+            <option value="Rent">Rent</option>
+            <option value="Upcoming">Upcoming</option>
+          </select>
+        </div>
+
+        <InputField
           name="location"
-          value={formData.location}
-          onChange={handleChange}
           placeholder="Location"
-          className="rounded p-2 border border-gray-300"
+          value={formData.location || ""}
+          onChange={handleChange}
         />
-        <input
-          type="number"
+        <InputField
           name="price"
-          value={formData.price}
-          onChange={handleChange}
+          type="number"
           placeholder="Price"
-          className="rounded p-2 border border-gray-300"
+          value={formData.price || ""}
+          onChange={handleChange}
         />
-        <input
-          type="number"
+        <InputField
           name="bedrooms"
-          value={formData.bedrooms}
-          onChange={handleChange}
+          type="number"
           placeholder="Bedrooms"
-          className="rounded p-2 border border-gray-300"
+          value={formData.bedrooms || ""}
+          onChange={handleChange}
         />
-        <input
-          type="number"
+        <InputField
           name="bathrooms"
-          value={formData.bathrooms}
-          onChange={handleChange}
-          placeholder="Bathrooms"
-          className="rounded p-2 border border-gray-300"
-        />
-        <input
           type="number"
-          name="areaSqft"
-          value={formData.areaSqft}
+          placeholder="Bathrooms"
+          value={formData.bathrooms || ""}
           onChange={handleChange}
+        />
+        <InputField
+          name="areaSqft"
+          type="number"
           placeholder="Area (sqft)"
-          className="rounded p-2 border border-gray-300"
+          value={formData.areaSqft || ""}
+          onChange={handleChange}
         />
       </div>
 
+      {/* Images */}
       <div>
-        <label className="block">Images</label>
-        <input type="file" multiple onChange={handleFileChange} />
+        {existingImages.length > 0 && (
+          <>
+            <label className="block font-medium mb-2">Existing Images</label>
+            <div className="grid grid-cols-4 gap-3">
+              {existingImages.map((url, idx) => (
+                <div key={idx} className="relative group">
+                  <img
+                    src={url}
+                    alt="existing"
+                    className="w-full h-24 object-cover rounded-lg shadow"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExistingImage(url)}
+                    className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        <label className="block font-medium mt-4">Upload New Images</label>
+        <input
+          type="file"
+          multiple
+          onChange={handleFileChange}
+          className="mt-2"
+        />
+        <div className="grid grid-cols-4 gap-3 mt-3">
+          {newImages.map((file, idx) => (
+            <div key={idx} className="relative group">
+              <img
+                src={URL.createObjectURL(file)}
+                alt="preview"
+                className="w-full h-24 object-cover rounded-lg shadow"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveNewImage(idx)}
+                className="absolute top-1 right-1 bg-red-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {["highlights", "featuresAmenities", "nearby", "extraHighlights"].map(
-        (field) => (
+      {/* Array fields */}
+      <div className="grid grid-cols-2 gap-4">
+        {(Object.keys(arrayInputs) as ArrayFields[]).map((field) => (
           <div key={field}>
-            <label className="block font-medium mt-4">{field}</label>
-
-            {(
-              formData[field as keyof Omit<PropertyData, "images">] as string[]
-            ).map((item, index) => (
-              <div key={index} className="flex gap-2 mb-2">
-                <input
-                  type="text"
-                  value={item}
-                  onChange={(e) =>
-                    handleArrayChange(
-                      e,
-                      field as keyof Omit<PropertyData, "images">,
-                      index
-                    )
-                  }
-                  className="rounded p-2 flex-1 border border-gray-300"
-                />
-                <button
-                  type="button"
-                  onClick={() =>
-                    removeArrayField(
-                      field as keyof Omit<PropertyData, "images">,
-                      index
-                    )
-                  }
-                  className="bg-red-500 text-white px-3 rounded"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-
-            <button
-              type="button"
-              onClick={() =>
-                addArrayField(field as keyof Omit<PropertyData, "images">)
-              }
-              className="bg-blue-500 text-white px-3 rounded mt-2"
-            >
-              + Add {field}
-            </button>
+            <label className="block font-medium mb-1 capitalize">{field}</label>
+            <input
+              type="text"
+              name={field}
+              value={arrayInputs[field]}
+              onChange={handleArrayChange}
+              placeholder={`Enter ${field} (comma separated)`}
+              className="w-full rounded-lg p-3 border border-gray-300 focus:ring focus:ring-green-200"
+            />
           </div>
-        )
-      )}
+        ))}
+      </div>
 
+      {/* Buttons */}
       <div className="flex justify-end gap-4 mt-6">
         <button
           type="button"
           onClick={onClose}
-          className="px-4 py-2 bg-gray-500 text-white rounded"
+          className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
+          disabled={loading}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 bg-green-600 text-white rounded"
+          className="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center justify-center gap-2"
+          disabled={loading}
         >
-          {property ? "Update" : "Add"} Property
+          {loading && (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+          )}
+          {property ? "Update Property" : "Add Property"}
         </button>
       </div>
     </form>
+  );
+}
+
+/* 🔹 Reusable Input Component */
+function InputField({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required = false,
+}: {
+  label?: string;
+  name: string;
+  type?: string;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+}) {
+  return (
+    <div>
+      {label && <label className="block font-medium mb-1">{label}</label>}
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full rounded-lg p-3 border border-gray-300 focus:ring focus:ring-green-200"
+        required={required}
+      />
+    </div>
   );
 }
