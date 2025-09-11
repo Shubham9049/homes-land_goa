@@ -163,7 +163,7 @@ export default function BuyDetails() {
             {property.highlights.map((h, idx) => (
               <span
                 key={idx}
-                className="bg-[var(--title)] text-white px-5 py-2 rounded-full shadow-md"
+                className="bg-gray-200 text-black px-5 py-2 rounded-full shadow-md"
               >
                 {h}
               </span>
