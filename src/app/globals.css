@@ -50,3 +50,18 @@ select option {
   --title: #2b1b12;
   --bg-color: #fef7f2;
 }
+
+.react-quill-editor {
+  height: 300px; /* or whatever you prefer */
+  display: flex;
+  flex-direction: column;
+}
+
+.react-quill-editor .ql-toolbar {
+  flex-shrink: 0;
+}
+
+.react-quill-editor .ql-container {
+  flex: 1;
+  overflow-y: auto;
+}

@@ -44,7 +44,9 @@ export default function PropertiesAdmin() {
 
   const fetchProperties = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/property");
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE}/property`
+      );
       setProperties(res.data);
     } catch (error) {
       console.error("Failed to fetch properties", error);
@@ -54,7 +56,9 @@ export default function PropertiesAdmin() {
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
-      await axios.delete(`http://localhost:8000/property/${slug}`);
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE}/property/${slug}`
+      );
       setProperties(properties.filter((p) => p.slug !== slug));
     } catch (error) {
       console.error("Delete failed", error);

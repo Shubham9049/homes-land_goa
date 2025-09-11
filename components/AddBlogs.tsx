@@ -116,8 +116,8 @@ const AddBlog = ({
 
       const res = await fetch(
         existingBlog
-          ? `${process.env.NEXT_PUBLIC_API_BASE}/blog/${existingBlog.slug}`
-          : `${process.env.NEXT_PUBLIC_API_BASE}/blog/add`,
+          ? `${process.env.NEXT_PUBLIC_API_BASE}/${existingBlog.slug}`
+          : `${process.env.NEXT_PUBLIC_API_BASE}/add`,
         {
           method: existingBlog ? "PUT" : "POST",
           body: blogData,

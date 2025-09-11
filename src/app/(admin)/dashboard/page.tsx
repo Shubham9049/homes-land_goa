@@ -14,7 +14,7 @@ export default function AdminDashboard() {
       try {
         // ✅ Fetch Blogs
         const blogsRes = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
+          `${process.env.NEXT_PUBLIC_API_BASE}/viewblog`
         );
         setTotalBlogs(blogsRes.data?.length || 0);
       } catch (err) {
