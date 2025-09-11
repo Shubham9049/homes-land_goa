@@ -64,7 +64,9 @@ export default function AdminBlogsPage() {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE}/blog/${slug}`,
-        { method: "DELETE" }
+        {
+          method: "DELETE",
+        }
       );
       const json = await res.json();
       if (res.ok) {

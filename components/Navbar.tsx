@@ -37,7 +37,7 @@ const Navbar = () => {
     { label: "Rent", path: "/rent" },
     { label: "Sell", path: "/sell" },
     { label: "Upcoming Projects", path: "/upcoming-projects" },
-    { label: "Blogs", path: "/blog" },
+    { label: "Blogs", path: "/blogs" },
     { label: "About Us", path: "/about" },
     { label: "Contact Us", path: "/contacts" },
   ];
@@ -69,9 +69,7 @@ const Navbar = () => {
             <Image
               src={logo}
               alt="Homes and land goa Logo"
-              width={100}
-              height={100}
-              className="w-full"
+              className="w-3/5"
               priority
             />
           </Link>

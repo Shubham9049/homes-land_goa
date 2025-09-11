@@ -35,6 +35,14 @@ type ArrayFields =
   | "nearby"
   | "extraHighlights";
 
+// 🔹 Map technical field names → human labels
+const fieldLabels: Record<ArrayFields, string> = {
+  highlights: "Highlights",
+  featuresAmenities: "Features & Amenities",
+  nearby: "Nearby",
+  extraHighlights: "Extra Highlights",
+};
+
 export default function PropertyForm({
   property,
   onClose,
@@ -306,13 +314,15 @@ export default function PropertyForm({
       <div className="grid grid-cols-2 gap-4">
         {(Object.keys(arrayInputs) as ArrayFields[]).map((field) => (
           <div key={field}>
-            <label className="block font-medium mb-1 capitalize">{field}</label>
+            <label className="block font-medium mb-1 capitalize">
+              {fieldLabels[field]}
+            </label>
             <input
               type="text"
               name={field}
               value={arrayInputs[field]}
               onChange={handleArrayChange}
-              placeholder={`Enter ${field} (comma separated)`}
+              placeholder={`Enter ${fieldLabels[field]} (comma separated)`}
               className="w-full rounded-lg p-3 border border-gray-300 focus:ring focus:ring-green-200"
             />
           </div>
