@@ -76,9 +76,8 @@ const PopularResidences = () => {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 md:w-5/6 mx-auto">
         {properties.map((house, index) => (
-          <Link href={`/buy/${house.slug}`} scroll={true}>
+          <Link key={house._id} href={`/buy/${house.slug}`} scroll={true}>
             <div
-              key={house._id}
               className="bg-[#e6cfc2] rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
               data-aos="zoom-in-up"
               data-aos-delay={index * 200}
