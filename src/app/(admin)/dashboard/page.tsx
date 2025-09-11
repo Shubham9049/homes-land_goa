@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Mail, FileText } from "lucide-react";
+import { Mail, FileText, Building } from "lucide-react";
 
 export default function AdminDashboard() {
   const [totalBlogs, setTotalBlogs] = useState<number | null>(null);
+  const [totalProperties, setTotalProperties] = useState<number | null>(null);
 
   const [loading, setLoading] = useState(true);
 
@@ -14,13 +15,18 @@ export default function AdminDashboard() {
       try {
         // ✅ Fetch Blogs
         const blogsRes = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE}/viewblog`
+          `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
         );
-        setTotalBlogs(blogsRes.data?.length || 0);
+        setTotalBlogs(blogsRes.data?.length || 0); // ✅ Fetch Blogs
+        const propertyRes = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE}/property`
+        );
+        setTotalProperties(propertyRes.data?.length || 0);
       } catch (err) {
         console.error("Failed to fetch dashboard data:", err);
 
         setTotalBlogs(0);
+        setTotalProperties(0);
       } finally {
         setLoading(false);
       }
@@ -46,6 +52,11 @@ export default function AdminDashboard() {
           title="Total Blogs"
           value={loading ? null : totalBlogs}
           icon={<FileText size={28} />}
+        />
+        <DashboardCard
+          title="Total Properties"
+          value={loading ? null : totalBlogs}
+          icon={<Building size={28} />}
         />
       </div>
     </div>

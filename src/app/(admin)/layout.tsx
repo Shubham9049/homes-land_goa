@@ -39,7 +39,7 @@ export default function AdminDashboardLayout({
       >
         <div className="flex flex-col h-full">
           <div className="px-6  text-xl font-bold border-b border-gray-800">
-            <Image src={logo} alt="Binge" width={150} />
+            <Image src={logo} alt="Binge" width={110} />
           </div>
           <nav className="flex-1 p-4 space-y-2">
             {navItems.map((item) => {
