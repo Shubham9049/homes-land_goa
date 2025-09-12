@@ -27,7 +27,7 @@ interface Property {
   title: string;
   slug: string;
   type?: string;
-  videoUrl?: string;
+  videoLink?: string;
   location?: string;
   price?: number | null;
   bedrooms?: number | null;
@@ -86,6 +86,23 @@ export default function BuyDetails() {
 
   const displayedImages = property.images.slice(0, 7);
   const extraCount = property.images.length - displayedImages.length;
+
+  function getYouTubeEmbedUrl(url: string) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        // short link
+        const videoId = parsedUrl.pathname.slice(1);
+        return `https://www.youtube.com/embed/${videoId}`;
+      } else if (parsedUrl.hostname.includes("youtube.com")) {
+        const videoId = parsedUrl.searchParams.get("v");
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
 
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
@@ -167,34 +184,6 @@ export default function BuyDetails() {
         </div>
       </div>
 
-      {/* Video Section */}
-      {property.videoUrl && (
-        <section className="max-w-7xl mx-auto px-4 py-12" data-aos="fade-up">
-          <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
-            Property Walkthrough / Best Place Showcase
-          </h2>
-          <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
-            {property.videoUrl.includes("youtube") ? (
-              <iframe
-                width="100%"
-                height="100%"
-                src={property.videoUrl.replace("watch?v=", "embed/")}
-                title="Property Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-lg"
-              ></iframe>
-            ) : (
-              <video controls className="w-full h-full object-cover rounded-lg">
-                <source src={property.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
-          </div>
-        </section>
-      )}
-
       {/* Highlights */}
       {property.highlights.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 py-12" data-aos="zoom-in-up">
@@ -263,6 +252,31 @@ export default function BuyDetails() {
           />
         )}
       </section>
+
+      {property.videoLink && (
+        <div className="w-11/12 md:w-5/6 mx-auto h-[500px] rounded-lg overflow-hidden shadow-md mt-10">
+          {property.videoLink.includes("youtube") ||
+          property.videoLink.includes("youtu.be") ? (
+            <iframe
+              width="100%"
+              height="100%"
+              src={getYouTubeEmbedUrl(property.videoLink)!}
+              title="Property Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <video
+              src={property.videoLink}
+              controls
+              className="w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+      )}
 
       {/* Features & Amenities */}
       {property.featuresAmenities.length > 0 && (

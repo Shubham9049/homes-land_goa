@@ -19,12 +19,15 @@ import { Navigation, Autoplay } from "swiper/modules";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import HelpSection from "../../../../components/HelpSection";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface Property {
   _id: string;
   title: string;
   slug: string;
   type?: string;
+  videoLink?: string;
   location?: string;
   price?: number | null;
   bedrooms?: number | null;
@@ -39,10 +42,18 @@ interface Property {
   googleMapUrl?: string;
 }
 
-export default function BuyDetails() {
+export default function UpcomingDetails() {
   const { slug } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration
+      once: true, // whether animation should happen only once
+      offset: 100, // offset (px) from the original trigger point
+    });
+  }, []);
 
   // Lightbox state
   const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +87,23 @@ export default function BuyDetails() {
   const displayedImages = property.images.slice(0, 7);
   const extraCount = property.images.length - displayedImages.length;
 
+  function getYouTubeEmbedUrl(url: string) {
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        // short link
+        const videoId = parsedUrl.pathname.slice(1);
+        return `https://www.youtube.com/embed/${videoId}`;
+      } else if (parsedUrl.hostname.includes("youtube.com")) {
+        const videoId = parsedUrl.searchParams.get("v");
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <Navbar />
@@ -103,7 +131,10 @@ export default function BuyDetails() {
       </Swiper>
 
       {/* Property Info */}
-      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div
+        className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+        data-aos="fade-up"
+      >
         <div>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             {property.title}
@@ -155,7 +186,7 @@ export default function BuyDetails() {
 
       {/* Highlights */}
       {property.highlights.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12" data-aos="zoom-in-up">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Highlights
           </h2>
@@ -163,7 +194,7 @@ export default function BuyDetails() {
             {property.highlights.map((h, idx) => (
               <span
                 key={idx}
-                className="bg-[var(--title)] text-white px-5 py-2 rounded-full shadow-md"
+                className="bg-[var(--bg-color)] text-black px-5 py-2 rounded-full shadow-md"
               >
                 {h}
               </span>
@@ -173,7 +204,7 @@ export default function BuyDetails() {
       )}
 
       {/* Image Gallery */}
-      <section className="max-w-7xl mx-auto px-4 py-12">
+      <section className="max-w-7xl mx-auto px-4 py-12" data-aos="fade-up">
         <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
           Image Gallery
         </h2>
@@ -187,6 +218,7 @@ export default function BuyDetails() {
                 setPhotoIndex(idx);
                 setIsOpen(true);
               }}
+              data-aos="zoom-in"
             >
               <Image
                 src={img}
@@ -221,6 +253,31 @@ export default function BuyDetails() {
         )}
       </section>
 
+      {property.videoLink && (
+        <div className="w-11/12 md:w-5/6 mx-auto h-[500px] rounded-lg overflow-hidden shadow-md mt-10">
+          {property.videoLink.includes("youtube") ||
+          property.videoLink.includes("youtu.be") ? (
+            <iframe
+              width="100%"
+              height="100%"
+              src={getYouTubeEmbedUrl(property.videoLink)!}
+              title="Property Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <video
+              src={property.videoLink}
+              controls
+              className="w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+      )}
+
       {/* Features & Amenities */}
       {property.featuresAmenities.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 py-12">
@@ -231,7 +288,8 @@ export default function BuyDetails() {
             {property.featuresAmenities.map((f, idx) => (
               <div
                 key={idx}
-                className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow"
+                className="p-4 bg-[var(--bg-color)] dark:bg-gray-800 rounded-lg shadow"
+                data-aos="fade-up"
               >
                 ⭐ {f}
               </div>
@@ -250,7 +308,7 @@ export default function BuyDetails() {
             {property.nearby.map((n, idx) => (
               <span
                 key={idx}
-                className="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full"
+                className="bg-[var(--bg-color)] dark:bg-gray-700 px-5 py-2 rounded-full"
               >
                 {n}
               </span>
@@ -269,7 +327,7 @@ export default function BuyDetails() {
             {property.extraHighlights.map((e, idx) => (
               <span
                 key={idx}
-                className="bg-gray-300 dark:bg-gray-600 px-5 py-2 rounded-full"
+                className="bg-[var(--bg-color)] dark:bg-gray-600 px-5 py-2 rounded-full"
               >
                 {e}
               </span>

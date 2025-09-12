@@ -91,23 +91,23 @@ export default function PropertiesAdmin() {
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full border border-gray-700 rounded-lg">
-          <thead className="bg-gray-900 text-white">
+          <thead className="bg-gray-900 text-white ">
             <tr>
               <th className="p-3">Title</th>
               <th className="p-3">Type</th>
               <th className="p-3">Purpose</th>
               <th className="p-3">Location</th>
-              <th className="p-3 text-center">Actions</th>
+              <th className="p-3">Actions</th>
             </tr>
           </thead>
           <tbody>
             {properties.length > 0 ? (
               properties.map((property) => (
                 <tr key={property._id} className="border-t border-gray-300">
-                  <td className="p-3">{property.title}</td>
-                  <td className="p-3">{property.type}</td>
-                  <td className="p-3">{property.purpose}</td>
-                  <td className="p-3">{property.location}</td>
+                  <td className="p-3 text-center">{property.title}</td>
+                  <td className="p-3 text-center">{property.type}</td>
+                  <td className="p-3 text-center ">{property.purpose}</td>
+                  <td className="p-3 text-center">{property.location}</td>
                   <td className="p-3 flex gap-3 justify-center">
                     <button
                       onClick={() => openViewModal(property)}
