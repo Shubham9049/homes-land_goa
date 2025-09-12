@@ -13,6 +13,7 @@ import { MapPin, User, ClipboardList, Handshake } from "lucide-react";
 import ReviewSection from "../../components/Testimonial";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import WhatsAppButton from "../../components/floatingBtn";
+import TopBlogs from "../../components/TopBlogs";
 
 const features = [
   {
@@ -96,6 +97,7 @@ function Landing() {
       </section>
 
       <ReviewSection />
+      <TopBlogs />
       <HelpSection />
       <Footer />
       <WhatsAppButton />
