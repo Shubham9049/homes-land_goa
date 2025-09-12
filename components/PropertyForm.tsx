@@ -328,6 +328,22 @@ export default function PropertyForm({
           </div>
         ))}
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <InputField
+          name="videoLink"
+          type="text"
+          placeholder="video link"
+          value={formData.videoLink || ""}
+          onChange={handleChange}
+        />
+        <InputField
+          name="googleMapUrl"
+          type="text"
+          placeholder="googleMapUrl"
+          value={formData.googleMapUrl || ""}
+          onChange={handleChange}
+        />
+      </div>
 
       {/* Buttons */}
       <div className="flex justify-end gap-4 mt-6">

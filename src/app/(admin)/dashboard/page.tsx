@@ -55,7 +55,7 @@ export default function AdminDashboard() {
         />
         <DashboardCard
           title="Total Properties"
-          value={loading ? null : totalBlogs}
+          value={loading ? null : totalProperties}
           icon={<Building size={28} />}
         />
       </div>

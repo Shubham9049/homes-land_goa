@@ -8,6 +8,7 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import HelpSection from "../../../components/HelpSection";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 interface Property {
   _id: string;
@@ -32,7 +33,6 @@ export default function BuyPage() {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`)
       .then((res) => res.json())
       .then((data) => {
-        // filter only BUY properties
         const buyProperties = data.filter(
           (p: Property) => p.purpose?.toLowerCase() === "buy"
         );
@@ -71,7 +71,12 @@ export default function BuyPage() {
           fill
           className="object-cover opacity-70"
         />
-        <div className="relative z-10 text-center">
+        <motion.div
+          className="relative z-10 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <h1 className="text-4xl md:text-6xl font-bold">
             Find Your Dream Home in Goa
           </h1>
@@ -82,13 +87,24 @@ export default function BuyPage() {
           >
             <span className="text-3xl">↓</span>
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center">
+      <motion.div
+        className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 },
+          },
+        }}
+      >
         {["All", "Apartment", "Villa", "Plot"].map((type) => (
-          <button
+          <motion.button
             key={type}
             onClick={() => setSelectedType(type)}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
@@ -96,11 +112,15 @@ export default function BuyPage() {
                 ? "bg-[var(--title)] text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
           >
             {type}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Property List */}
       <div ref={buyRef} className="py-12 bg-[var(--bg-color)]">
@@ -122,11 +142,26 @@ export default function BuyPage() {
             </p>
           </div>
         ) : (
-          <div className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.2 },
+              },
+            }}
+          >
             {filtered.map((p) => (
-              <div
+              <motion.div
                 key={p._id}
                 className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9, y: 30 },
+                  visible: { opacity: 1, scale: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6 }}
               >
                 {/* Image */}
                 <div className="relative h-64 w-full">
@@ -168,14 +203,14 @@ export default function BuyPage() {
 
                   <button
                     onClick={() => router.push(`/buy/${p.slug}`)}
-                    className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
+                    className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800 transition"
                   >
                     View Details
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 

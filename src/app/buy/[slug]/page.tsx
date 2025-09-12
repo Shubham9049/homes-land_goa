@@ -19,12 +19,15 @@ import { Navigation, Autoplay } from "swiper/modules";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import HelpSection from "../../../../components/HelpSection";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface Property {
   _id: string;
   title: string;
   slug: string;
   type?: string;
+  videoUrl?: string;
   location?: string;
   price?: number | null;
   bedrooms?: number | null;
@@ -43,6 +46,14 @@ export default function BuyDetails() {
   const { slug } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration
+      once: true, // whether animation should happen only once
+      offset: 100, // offset (px) from the original trigger point
+    });
+  }, []);
 
   // Lightbox state
   const [isOpen, setIsOpen] = useState(false);
@@ -103,7 +114,10 @@ export default function BuyDetails() {
       </Swiper>
 
       {/* Property Info */}
-      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div
+        className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+        data-aos="fade-up"
+      >
         <div>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             {property.title}
@@ -153,9 +167,37 @@ export default function BuyDetails() {
         </div>
       </div>
 
+      {/* Video Section */}
+      {property.videoUrl && (
+        <section className="max-w-7xl mx-auto px-4 py-12" data-aos="fade-up">
+          <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
+            Property Walkthrough / Best Place Showcase
+          </h2>
+          <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+            {property.videoUrl.includes("youtube") ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={property.videoUrl.replace("watch?v=", "embed/")}
+                title="Property Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
+            ) : (
+              <video controls className="w-full h-full object-cover rounded-lg">
+                <source src={property.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Highlights */}
       {property.highlights.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="max-w-7xl mx-auto px-4 py-12" data-aos="zoom-in-up">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Highlights
           </h2>
@@ -173,7 +215,7 @@ export default function BuyDetails() {
       )}
 
       {/* Image Gallery */}
-      <section className="max-w-7xl mx-auto px-4 py-12">
+      <section className="max-w-7xl mx-auto px-4 py-12" data-aos="fade-up">
         <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
           Image Gallery
         </h2>
@@ -187,6 +229,7 @@ export default function BuyDetails() {
                 setPhotoIndex(idx);
                 setIsOpen(true);
               }}
+              data-aos="zoom-in"
             >
               <Image
                 src={img}
@@ -232,6 +275,7 @@ export default function BuyDetails() {
               <div
                 key={idx}
                 className="p-4 bg-[var(--bg-color)] dark:bg-gray-800 rounded-lg shadow"
+                data-aos="fade-up"
               >
                 ⭐ {f}
               </div>
