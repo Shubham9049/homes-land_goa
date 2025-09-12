@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Mail, FileText, Building } from "lucide-react";
+import { Mail, FileText, Building, Contact2 } from "lucide-react";
 
 export default function AdminDashboard() {
   const [totalBlogs, setTotalBlogs] = useState<number | null>(null);
   const [totalProperties, setTotalProperties] = useState<number | null>(null);
+  const [totalContacts, setTotalContacts] = useState<number | null>(null);
 
   const [loading, setLoading] = useState(true);
 
@@ -18,15 +19,22 @@ export default function AdminDashboard() {
           `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
         );
         setTotalBlogs(blogsRes.data?.length || 0); // ✅ Fetch Blogs
+
         const propertyRes = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE}/property`
         );
         setTotalProperties(propertyRes.data?.length || 0);
+
+        const contactRes = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/contacts`
+        );
+        setTotalContacts(contactRes.data?.length || 0);
       } catch (err) {
         console.error("Failed to fetch dashboard data:", err);
 
         setTotalBlogs(0);
         setTotalProperties(0);
+        setTotalContacts(0);
       } finally {
         setLoading(false);
       }
@@ -57,6 +65,11 @@ export default function AdminDashboard() {
           title="Total Properties"
           value={loading ? null : totalProperties}
           icon={<Building size={28} />}
+        />
+        <DashboardCard
+          title="Total Contact Requests"
+          value={loading ? null : totalContacts}
+          icon={<Contact2 size={28} />}
         />
       </div>
     </div>

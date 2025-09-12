@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   Building2,
+  Contact,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "../../../assets/logo.png";
@@ -27,6 +28,7 @@ export default function AdminDashboardLayout({
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Blogs", href: "/adminblogs", icon: FileText },
     { name: "Properties", href: "/properties", icon: Building2 },
+    { name: "Contact Request", href: "/contact-requests", icon: Contact },
   ];
 
   return (

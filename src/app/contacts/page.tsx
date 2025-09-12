@@ -21,6 +21,8 @@ export default function ContactPage() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const contactRef = useRef<HTMLDivElement | null>(null);
   const scrollToNext = () => {
@@ -35,8 +37,51 @@ export default function ContactPage() {
     }
   };
 
+  // Handle input change
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setError("");
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/contacts`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setError(data.message || "Something went wrong!");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Failed to submit. Try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className=" text-black  transition-colors">
+    <div className="text-black transition-colors">
       <Navbar />
 
       {/* Hero Banner */}
@@ -102,13 +147,17 @@ export default function ContactPage() {
         </div>
 
         {/* Right form */}
-        <form className="space-y-6 bg-white dark:bg-[#1e1e1e] p-8 rounded-xl shadow-lg border dark:border-white/10">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 bg-white dark:bg-[#1e1e1e] p-8 rounded-xl shadow-lg border dark:border-white/10"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
               type="text"
               name="name"
               placeholder="Your Name"
               value={formData.name}
+              onChange={handleChange}
               className="border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
               required
             />
@@ -117,6 +166,7 @@ export default function ContactPage() {
               name="email"
               placeholder="Your Email"
               value={formData.email}
+              onChange={handleChange}
               className="border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
               required
             />
@@ -126,6 +176,7 @@ export default function ContactPage() {
             name="subject"
             placeholder="Subject"
             value={formData.subject}
+            onChange={handleChange}
             className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
           />
           <textarea
@@ -133,15 +184,30 @@ export default function ContactPage() {
             rows={5}
             placeholder="Your Message"
             value={formData.message}
+            onChange={handleChange}
             className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
             required
           />
+
+          {/* Success / Error messages */}
+          {success && (
+            <p className="text-green-600">Message sent successfully!</p>
+          )}
+          {error && <p className="text-red-600">{error}</p>}
+
           <button
             type="submit"
             disabled={loading}
-            className="bg-[var(--primary-color)] text-white px-6 py-3 rounded-md hover:rounded-xl transition disabled:opacity-60"
+            className="relative px-6 py-3 rounded-md bg-[var(--title)] text-white font-semibold 
+  overflow-hidden group cursor-pointer transition-all duration-300"
           >
-            {loading ? "Submitting..." : "Submit"}
+            <span className="relative z-10">
+              {loading ? "Submitting..." : "Submit"}
+            </span>
+            <span
+              className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/20 to-transparent 
+    translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+            ></span>
           </button>
         </form>
       </section>

@@ -132,7 +132,7 @@ export default function BuyDetails() {
 
       {/* Property Info */}
       <div
-        className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+        className="w-11/12 md:w-5/6 mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
         data-aos="fade-up"
       >
         <div>
@@ -186,7 +186,10 @@ export default function BuyDetails() {
 
       {/* Highlights */}
       {property.highlights.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12" data-aos="zoom-in-up">
+        <section
+          className="w-11/12 md:w-5/6 mx-auto px-4 py-12"
+          data-aos="zoom-in-up"
+        >
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Highlights
           </h2>
@@ -204,7 +207,10 @@ export default function BuyDetails() {
       )}
 
       {/* Image Gallery */}
-      <section className="max-w-7xl mx-auto px-4 py-12" data-aos="fade-up">
+      <section
+        className="w-11/12 md:w-5/6 mx-auto px-4 py-12"
+        data-aos="fade-up"
+      >
         <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
           Image Gallery
         </h2>
@@ -280,7 +286,7 @@ export default function BuyDetails() {
 
       {/* Features & Amenities */}
       {property.featuresAmenities.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="w-11/12 md:w-5/6 mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Features & Amenities
           </h2>
@@ -300,7 +306,7 @@ export default function BuyDetails() {
 
       {/* Nearby Places */}
       {property.nearby.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="w-11/12 md:w-5/6 mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Nearby Places
           </h2>
@@ -319,7 +325,7 @@ export default function BuyDetails() {
 
       {/* Extra Highlights */}
       {property.extraHighlights.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="w-11/12 md:w-5/6 mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Extra Highlights
           </h2>
@@ -338,7 +344,7 @@ export default function BuyDetails() {
 
       {/* Google Map */}
       {property.googleMapUrl && (
-        <section className="max-w-7xl mx-auto px-4 py-12">
+        <section className="w-11/12 md:w-5/6 mx-auto px-4 py-12">
           <h2 className="text-2xl font-semibold mb-6 text-[var(--primary-color)]">
             Location
           </h2>
