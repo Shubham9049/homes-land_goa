@@ -57,9 +57,9 @@ export default function TopBlogs() {
   }
 
   return (
-    <section className="w-11/12 md:w-5/6 mx-auto py-12">
+    <section className="w-11/12 md:w-5/6 mx-auto py-12 tracking-widest">
       {/* Centered Heading */}
-      <h2 className="text-3xl md:text-5xl font-bold text-center text-[var(--title)] mb-4">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--title)] mb-4 tracking-widest">
         Latest Blogs
       </h2>
 
@@ -68,7 +68,7 @@ export default function TopBlogs() {
         {blogs.map((blog) => (
           <div
             key={blog._id}
-            className="bg-white rounded-2xl shadow hover:shadow-lg transition p-5 flex flex-col"
+            className="bg-white  shadow hover:shadow-lg transition p-5 flex flex-col"
           >
             {blog.coverImage && (
               <Image
@@ -76,7 +76,7 @@ export default function TopBlogs() {
                 alt={blog.title}
                 width={1200}
                 height={600}
-                className="object-cover rounded-lg"
+                className="object-cover "
               />
             )}
 
@@ -100,11 +100,19 @@ export default function TopBlogs() {
 
       {/* View More Button */}
       <div className="text-center mt-10">
-        <Link
-          href="/blogs"
-          className="bg-[var(--title)] cursor-pointer text-white px-6 py-3 rounded-md font-semibold hover:bg-[#2a1b13] transition"
-        >
-          View More Blogs
+        <Link href="/blogs">
+          <button
+            className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300"
+          >
+            <span className="relative z-10 tracking-widest">
+              View More Blogs
+            </span>
+            <span
+              className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+            ></span>
+          </button>
         </Link>
       </div>
     </section>

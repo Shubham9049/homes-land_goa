@@ -50,7 +50,7 @@ const reviews: Review[] = [
 
 export default function ReviewSection() {
   return (
-    <section className="w-full py-12  font-raleway bg-[var(--bg-color)] text-black relative">
+    <section className="w-full py-12  font-raleway bg-[var(--bg-color)] text-black relative tracking-widest">
       {/* <div className="absolute top-0 left-0">
         <Image src={upwards} alt="upwards" />
       </div>
@@ -61,7 +61,7 @@ export default function ReviewSection() {
         {/* Section Label */}
 
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-bold text-[var(--title)] mt-2 text-start mb-6">
+        <h2 className="text-center text-3xl md:text-4xl font-bold text-[var(--title)] mt-2 mb-6 tracking-widest">
           What Our Clients Say About Us
         </h2>
 
@@ -87,7 +87,7 @@ export default function ReviewSection() {
         >
           {reviews.map((review, index) => (
             <SwiperSlide key={index}>
-              <div className="relative bg-white rounded-2xl border border-neutral-200 p-6 shadow-md h-80 flex flex-col justify-between hover:shadow-lg transition duration-300">
+              <div className="relative bg-white  border border-neutral-200 p-6 shadow-md h-80 flex flex-col justify-between hover:shadow-lg transition duration-300">
                 {/* Quote Icon */}
                 <FaQuoteLeft className="text-[var(--primary-color)] text-2xl opacity-40" />
 

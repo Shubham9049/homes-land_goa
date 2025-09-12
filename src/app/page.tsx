@@ -18,6 +18,9 @@ import buy from "../../assets/buy.avif";
 import rent from "../../assets/rent.avif";
 import Image from "next/image";
 import Link from "next/link";
+import abc from "../../assets/abc.avif";
+import sell from "../../assets/sell.webp";
+import ContactInfo from "../../components/ContactInfo";
 
 const features = [
   {
@@ -61,7 +64,7 @@ function Landing() {
       <Hero />
 
       <section className="w-11/12 md:w-5/6 mx-auto py-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-[var(--title)] mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--title)] mb-12 tracking-widest">
           What Are You Looking For?
         </h2>
 
@@ -100,13 +103,45 @@ function Landing() {
       <PopularResidences />
       <Stats />
 
+      {/* ✅ Parallax Section */}
+      <section
+        className="relative h-[60vh] flex items-center justify-center text-center text-white"
+        style={{
+          backgroundImage: `url(${abc.src})`, // replace with your image
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Content */}
+        <div className="relative z-10 px-4">
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-4 tracking-widest"
+            data-aos="fade-up"
+          >
+            Find Your Dream Home
+          </h2>
+          <p
+            className="text-lg md:text-xl max-w-2xl mx-auto tracking-widest"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            Discover carefully curated residences that reflect your lifestyle
+            and aspirations, where comfort meets elegance.
+          </p>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section
-        className="py-12 w-11/12 md:w-5/6 mx-auto text-center"
+        className="py-12 w-11/12 md:w-5/6 mx-auto text-center tracking-widest"
         data-aos="fade-up"
       >
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[var(--title)]">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--title)] tracking-widest">
           Why Choose Us
         </h2>
         <p className="text-lg md:text-xl text-[var(--primary-color)] mb-12">
@@ -120,7 +155,7 @@ function Landing() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-[var(--bg-color)] text-left p-6 rounded-2xl shadow-sm hover:shadow-md transition-all"
+              className="bg-[var(--bg-color)] text-left p-6  shadow-sm hover:shadow-md transition-all"
               data-aos="zoom-in-up"
               data-aos-delay={index * 200} // stagger animation
             >
@@ -140,6 +175,23 @@ function Landing() {
 
       <ReviewSection />
       <TopBlogs />
+      {/* ✅ Parallax Section */}
+      <section
+        className="relative h-[60vh] flex items-center justify-center text-center text-white"
+        style={{
+          backgroundImage: `url(${sell.src})`, // replace with your image
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Content */}
+        <div className="relative z-10 px-4"></div>
+      </section>
+      <ContactInfo />
       <HelpSection />
       <Footer />
       <WhatsAppButton />

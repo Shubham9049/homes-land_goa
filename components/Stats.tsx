@@ -74,19 +74,19 @@ const Stats: React.FC = () => {
             alt="Dining"
             width={600}
             height={400}
-            className="relative z-10 w-full h-[300px] md:h-[400px] object-cover rounded-2xl"
+            className="relative z-10 w-full h-[300px] md:h-[400px] object-cover "
           />
         </div>
         {/* Text Content */}
         <div className="z-10">
           <h2
-            className="text-3xl md:text-5xl font-bold text-[var(--title)] mt-2"
+            className="text-3xl md:text-4xl font-bold text-[var(--title)] mt-2 tracking-widest"
             data-aos="fade-right"
           >
             We Help You To Find Your Dream Home
           </h2>
           <p
-            className="text-[var(--primary-color)] text-lg font-semibold mb-8 mt-4"
+            className="text-[var(--primary-color)] text-lg font-semibold mb-8 mt-4 tracking-widest"
             data-aos="fade-right"
           >
             From cozy cottages to luxurious estates, our dedicated team guides
@@ -95,8 +95,8 @@ const Stats: React.FC = () => {
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x border-t border-gray-300 mb-8">
-            <div className="py-4 sm:pr-6">
+          <div className="grid grid-cols-1 tracking-widest sm:grid-cols-2 md:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x border-t border-gray-300 mb-8">
+            <div className="py-4 sm:pr-6 ">
               <p className="text-[var(--primary-color)] text-4xl font-sans font-bold">
                 {avlHouses}K+
               </p>
