@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[var(--bg-color)] text-[var(--title)] pt-12">
+    <footer className="bg-[#091d35] text-white pt-12">
       {/* Main Footer Content */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto pb-10">
         {/* Brand Section */}
@@ -19,7 +19,7 @@ const Footer = () => {
         {/* Quick Links */}
         <div>
           <h3 className="text-2xl font-bold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-base font-medium">
+          <ul className="space-y-2 text-base ">
             <li>
               <Link href="/buy">Buy</Link>
             </li>
@@ -38,7 +38,7 @@ const Footer = () => {
         {/* Support */}
         <div>
           <h3 className="text-2xl font-bold mb-3">Support</h3>
-          <ul className="space-y-2 text-base font-medium">
+          <ul className="space-y-2 text-base ">
             <li>
               <Link href="/faq">FAQ</Link>
             </li>
@@ -57,7 +57,7 @@ const Footer = () => {
         {/* Social Links */}
         <div>
           <h3 className=" text-2xl font-bold mb-3">Our Social</h3>
-          <ul className="space-y-3 text-base font-medium">
+          <ul className="space-y-3 text-base ">
             <li>
               <Link
                 href="https://instagram.com/yourprofile"
@@ -94,7 +94,7 @@ const Footer = () => {
         {/* Contact */}
         <div>
           <h3 className="text-2xl font-bold mb-3">Contact</h3>
-          <ul className="space-y-3 text-base font-medium">
+          <ul className="space-y-3 text-base ">
             <li className="flex items-start gap-2">
               <MapPin size={18} className="mt-1" />
               Casa Lotus, H/No. 4/213 A, Porba Vaddo, <br /> Calangute 403516
@@ -124,7 +124,7 @@ const Footer = () => {
             href="https://www.bigwigmediadigital.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--primary-color)] font-semibold hover:underline"
+            className=" font-semibold hover:underline"
           >
             Bigwig Media Digital
           </Link>

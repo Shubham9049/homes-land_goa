@@ -61,7 +61,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[var(--bg-color)] text-black  fixed w-full top-0 z-50  transition-colors">
+    <nav className="bg-[#091d35] text-white  fixed w-full top-0 z-50  transition-colors">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex justify-between h-20 items-center">
           {/* Logo (Always visible) */}
@@ -81,15 +81,13 @@ const Navbar = () => {
                 key={index}
                 href={item.path}
                 onClick={() => setActiveItem(item.label)}
-                className={`relative pb-1 text-lg transition-colors hover:text-[var(--primary-color)] ${
-                  activeItem === item.label
-                    ? "text-[var(--title)]"
-                    : "text-[var(--primary-color)]"
+                className={`relative pb-1 text-sm transition-colors text-center text-gray-300 font-semibold tracking-widest  hover:text-[#E50E0B] ${
+                  activeItem === item.label ? "text-[#E50E0B]" : "text-white"
                 }`}
               >
                 {item.label}
                 {activeItem === item.label && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--primary-color)]"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E50E0B]"></span>
                 )}
               </Link>
             ))}

@@ -9,11 +9,11 @@
 }
 
 #google_translate_element select {
-  @apply bg-transparent text-white border border-white px-2 rounded-full py-1;
+  @apply bg-transparent text-white border border-black px-2 rounded-full py-1;
 }
 
 #google_translate_element select option {
-  background-color: black;
+  background-color: white;
   color: white;
 }
 .goog-te-banner-frame.skiptranslate {
@@ -31,18 +31,18 @@ body {
 /* Force white text inside custom language selector */
 select,
 select option {
-  color: black !important;
+  color: white !important;
 }
 
 /* For your specific selector */
 .language-selector {
-  color: black !important;
+  color: white !important;
   max-width: 120px;
 }
 
 .language-selector option {
-  color: black !important;
-  background-color: white !important;
+  color: white !important;
+  background-color: #091d35 !important;
 }
 
 :root {
