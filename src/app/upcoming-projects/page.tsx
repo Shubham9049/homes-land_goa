@@ -75,7 +75,7 @@ export default function BuyPage() {
           <h1 className="text-4xl md:text-6xl font-bold">
             Find Your Dream Home in Goa
           </h1>
-          <p className="mt-4 text-lg">Apartments • Villas • Penthouses</p>
+          <p className="mt-4 text-lg">Apartments • Villas • Plot</p>
           <button
             onClick={scrollToNext}
             className="mt-10 animate-bounce border rounded-full w-fit px-1 py-2 mx-auto cursor-pointer"
@@ -87,7 +87,7 @@ export default function BuyPage() {
 
       {/* Filters */}
       <div className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center">
-        {["All", "Apartment", "Villa", "Penthouse"].map((type) => (
+        {["All", "Apartment", "Villa", "Plot"].map((type) => (
           <button
             key={type}
             onClick={() => setSelectedType(type)}
