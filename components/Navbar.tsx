@@ -139,7 +139,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Close menu"
-            className="text-2xl"
+            className="text-2xl text-black"
           >
             ✕
           </button>
