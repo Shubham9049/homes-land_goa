@@ -163,7 +163,7 @@ export default function BuyDetails() {
             {property.highlights.map((h, idx) => (
               <span
                 key={idx}
-                className="bg-gray-200 text-black px-5 py-2 rounded-full shadow-md"
+                className="bg-[var(--bg-color)] text-black px-5 py-2 rounded-full shadow-md"
               >
                 {h}
               </span>
@@ -231,7 +231,7 @@ export default function BuyDetails() {
             {property.featuresAmenities.map((f, idx) => (
               <div
                 key={idx}
-                className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow"
+                className="p-4 bg-[var(--bg-color)] dark:bg-gray-800 rounded-lg shadow"
               >
                 ⭐ {f}
               </div>
@@ -250,7 +250,7 @@ export default function BuyDetails() {
             {property.nearby.map((n, idx) => (
               <span
                 key={idx}
-                className="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full"
+                className="bg-[var(--bg-color)] dark:bg-gray-700 px-5 py-2 rounded-full"
               >
                 {n}
               </span>
@@ -269,7 +269,7 @@ export default function BuyDetails() {
             {property.extraHighlights.map((e, idx) => (
               <span
                 key={idx}
-                className="bg-gray-300 dark:bg-gray-600 px-5 py-2 rounded-full"
+                className="bg-[var(--bg-color)] dark:bg-gray-600 px-5 py-2 rounded-full"
               >
                 {e}
               </span>
