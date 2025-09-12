@@ -78,7 +78,7 @@ const PopularResidences = () => {
         {properties.map((house, index) => (
           <Link key={house._id} href={`/buy/${house.slug}`} scroll={true}>
             <div
-              className="bg-[#e6cfc2] rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
+              className="bg-[var(--bg-color)] rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer"
               data-aos="zoom-in-up"
               data-aos-delay={index * 200}
             >

@@ -78,7 +78,7 @@ function Landing() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-[#dec3b3] text-left p-6 rounded-2xl shadow-sm hover:shadow-md transition-all"
+              className="bg-[var(--bg-color)] text-left p-6 rounded-2xl shadow-sm hover:shadow-md transition-all"
               data-aos="zoom-in-up"
               data-aos-delay={index * 200} // stagger animation
             >
