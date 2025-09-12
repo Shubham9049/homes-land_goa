@@ -77,7 +77,7 @@ export default function BuyDetails() {
   const extraCount = property.images.length - displayedImages.length;
 
   return (
-    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300 tracking-widest">
       <Navbar />
 
       {/* Hero Swiper */}

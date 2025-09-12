@@ -78,10 +78,12 @@ export default function BuyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-widest">
             Find Your Dream Home in Goa
           </h1>
-          <p className="mt-4 text-lg">Apartments • Villas • Plot</p>
+          <p className="mt-4 text-lg tracking-widest">
+            Apartments • Villas • Plot
+          </p>
           <button
             onClick={scrollToNext}
             className="mt-10 animate-bounce border rounded-full w-fit px-1 py-2 mx-auto cursor-pointer"
@@ -93,7 +95,7 @@ export default function BuyPage() {
 
       {/* Filters */}
       <motion.div
-        className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center"
+        className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center tracking-widest"
         initial="hidden"
         animate="visible"
         variants={{
@@ -130,7 +132,7 @@ export default function BuyPage() {
             Loading properties...
           </p>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-20 text-gray-500 col-span-full">
+          <div className="text-center py-20 text-gray-500 col-span-full tracking-widest">
             <h2 className="text-2xl font-semibold mb-2">
               No properties available
             </h2>
@@ -144,7 +146,7 @@ export default function BuyPage() {
           </div>
         ) : (
           <motion.div
-            className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 tracking-widest"
             initial="hidden"
             animate="visible"
             variants={{

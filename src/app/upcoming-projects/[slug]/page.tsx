@@ -105,7 +105,7 @@ export default function UpcomingDetails() {
   }
 
   return (
-    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300 tracking-widest">
       <Navbar />
 
       {/* Hero Swiper */}

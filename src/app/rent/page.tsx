@@ -72,10 +72,12 @@ export default function BuyPage() {
           className="object-cover opacity-70"
         />
         <div className="relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-widest">
             Find Your Dream Home in Goa
           </h1>
-          <p className="mt-4 text-lg">Apartments • Villas • Penthouses</p>
+          <p className="mt-4 text-lg tracking-widest">
+            Apartments • Villas • Penthouses
+          </p>
           <button
             onClick={scrollToNext}
             className="mt-10 animate-bounce border rounded-full w-fit px-1 py-2 mx-auto cursor-pointer"
@@ -86,7 +88,7 @@ export default function BuyPage() {
       </div>
 
       {/* Filters */}
-      <div className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center">
+      <div className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center tracking-widest">
         {["All", "Apartment", "Villa", "Penthouse"].map((type) => (
           <button
             key={type}

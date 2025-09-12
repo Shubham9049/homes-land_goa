@@ -72,14 +72,14 @@ function Sell() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative pt-[80px] md:pt-[128px] h-[80vh] flex flex-col justify-center items-center text-center px-6">
+      <div className="relative pt-[80px] md:pt-[128px] h-[80vh] flex flex-col justify-center items-center text-center px-6 tracking-widest">
         <Image
           src={banner}
           alt="Banner"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative text-white">
-          <h1 className="text-3xl md:text-5xl font-bold">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-widest">
             Sell Your Property With Us
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-white mx-auto">
@@ -98,9 +98,9 @@ function Sell() {
       {/* Process Section */}
       <section
         ref={sellRef}
-        className="py-12 bg-white w-11/12 md:w-5/6 text-[var(--primary-color)] mx-auto"
+        className="py-12 bg-white w-11/12 md:w-5/6 text-[var(--primary-color)] mx-auto tracking-widest"
       >
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest">
           Our Selling Process
         </h2>
         <div className="grid md:grid-cols-3 gap-10 ">
@@ -138,8 +138,8 @@ function Sell() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-12 bg-[var(--bg-color)] text-[var(--primary-color)]">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+      <section className="py-12 bg-[var(--bg-color)] text-[var(--primary-color)] tracking-widest">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest">
           Why Sell With Us?
         </h2>
         <div className="grid md:grid-cols-3 gap-10 w-11/12 md:w-5/6 mx-auto">
@@ -175,10 +175,10 @@ function Sell() {
 
       {/* Contact Form with OTP */}
       <section className="py-16 bg-white w-11/12 md:w-5/6 mx-auto text-[var(--primary-color)]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest ">
           Get In Touch With Us
         </h2>
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="grid md:grid-cols-2 gap-10 items-center tracking-widest">
           {/* Contact Info */}
           <div className="space-y-6">
             <p className="text-lg text-gray-600">
