@@ -159,7 +159,7 @@ export default function BuyPage() {
             {filtered.map((p) => (
               <motion.div
                 key={p._id}
-                className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
+                className=" overflow-hidden shadow-md hover:shadow-xl transition bg-white"
                 variants={{
                   hidden: { opacity: 0, scale: 0.9, y: 30 },
                   visible: { opacity: 1, scale: 1, y: 0 },
@@ -206,7 +206,7 @@ export default function BuyPage() {
 
                   <button
                     onClick={() => router.push(`/buy/${p.slug}`)}
-                    className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800 transition"
+                    className="mt-3 w-full bg-[var(--title)] text-white py-2 hover:bg-gray-800 transition"
                   >
                     View Details
                   </button>
