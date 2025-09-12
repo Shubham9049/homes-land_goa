@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react";
 import { MapPin, User, ClipboardList, Handshake } from "lucide-react";
 import Aos from "aos";
 import HelpSection from "../../../components/HelpSection";
+import ContactInfo from "../../../components/ContactInfo";
 
 const features = [
   {
@@ -74,10 +75,12 @@ export default function OurJourney() {
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">About Us</h1>
-          <p className="text-lg md:text-2xl max-w-2xl mx-auto">
-            From vision to reality — building trust, homes, and futures
+        <div className="relative z-10 text-center text-white px-4 ">
+          <h1 className=" md:text-5xl font-bold mb-4 tracking-widest">
+            About Us
+          </h1>
+          <p className="text-lg md:text-2xl max-w-2xl mx-auto tracking-widest">
+            From vision to reality - building trust, homes, and futures
           </p>
 
           {/* Scroll Down Indicator */}
@@ -99,16 +102,16 @@ export default function OurJourney() {
               alt="our story"
               width={600}
               height={400}
-              className="relative z-10 w-full h-[300px] md:h-[400px] object-cover rounded-2xl"
+              className="relative z-10 w-full h-[300px] md:h-[400px] object-cover "
             />
           </div>
 
           {/* Right Side - Content */}
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-[var(--title)] mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--title)] mb-6 tracking-widest">
               Our Story
             </h2>
-            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose mb-4">
+            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose mb-4 tracking-widest">
               What began as a small team with a passion for real estate has
               grown into a trusted brand that helps people turn dreams of owning
               property into reality. From modest beginnings, we’ve expanded our
@@ -117,10 +120,10 @@ export default function OurJourney() {
               of time.
             </p>
 
-            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose">
+            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose tracking-widest">
               Our journey is built on a foundation of trust, transparency, and
               commitment to excellence. Every project we undertake reflects our
-              belief that real estate is more than just buildings — it’s about
+              belief that real estate is more than just buildings, it’s about
               creating communities, securing futures, and adding value to lives.
               Whether it’s a first home, a luxury villa, or an investment
               property, we are here to make your real estate journey seamless,
@@ -131,13 +134,13 @@ export default function OurJourney() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-12   bg-[var(--bg-color)]">
+      <section className="py-12   tracking-widest">
         <div
           className="w-11/12 md:w-5/6 mx-auto text-center"
           data-aos="fade-up"
         >
           {/* Heading */}
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[var(--title)]">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--title)] tracking-widest ">
             Why Choose Us
           </h2>
           <p className="text-lg md:text-xl text-[var(--primary-color)] mb-12">
@@ -151,7 +154,7 @@ export default function OurJourney() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white text-left p-6 rounded-2xl shadow-sm hover:shadow-md transition-all"
+                className="bg-[var(--bg-color)] text-left p-6 shadow-sm hover:shadow-md transition-all"
                 data-aos="zoom-in-up"
                 data-aos-delay={index * 200} // stagger animation
               >
@@ -169,6 +172,7 @@ export default function OurJourney() {
           </div>
         </div>
       </section>
+      <ContactInfo />
       <HelpSection />
 
       <Footer />

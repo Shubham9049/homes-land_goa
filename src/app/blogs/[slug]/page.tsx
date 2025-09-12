@@ -6,6 +6,8 @@ import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import Image from "next/image";
 import styles from "./BlogDetails.module.css";
+import ContactInfo from "../../../../components/ContactInfo";
+import HelpSection from "../../../../components/HelpSection";
 
 interface Blog {
   _id: string;
@@ -75,6 +77,8 @@ export default function BlogDetails() {
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
       </section>
+      <ContactInfo />
+      <HelpSection />
 
       <Footer />
     </div>

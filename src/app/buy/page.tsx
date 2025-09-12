@@ -9,6 +9,7 @@ import Footer from "../../../components/Footer";
 import HelpSection from "../../../components/HelpSection";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import ContactInfo from "../../../components/ContactInfo";
 
 interface Property {
   _id: string;
@@ -123,7 +124,7 @@ export default function BuyPage() {
       </motion.div>
 
       {/* Property List */}
-      <div ref={buyRef} className="py-12 bg-[var(--bg-color)]">
+      <div ref={buyRef} className="py-12 ">
         {loading ? (
           <p className="text-center py-20 text-gray-500">
             Loading properties...
@@ -181,7 +182,7 @@ export default function BuyPage() {
                 </div>
 
                 {/* Info */}
-                <div className="p-4">
+                <div className="p-4 bg-[var(--bg-color)]">
                   <h3 className="font-bold text-[var(--title)] text-lg line-clamp-1">
                     {p.title}
                   </h3>
@@ -213,7 +214,7 @@ export default function BuyPage() {
           </motion.div>
         )}
       </div>
-
+      <ContactInfo />
       <HelpSection />
       <Footer />
     </div>

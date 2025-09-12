@@ -5,6 +5,8 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Fuse from "fuse.js";
 import Image from "next/image";
+import ContactInfo from "../../../components/ContactInfo";
+import HelpSection from "../../../components/HelpSection";
 
 interface Blog {
   _id: string;
@@ -86,19 +88,19 @@ function Blogs() {
         </div>
 
         {/* Blog grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 tracking-widest">
           {currentBlogs.length > 0 ? (
             currentBlogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-white rounded-2xl shadow hover:shadow-lg transition p-5 flex flex-col"
+                className="bg-white shadow hover:shadow-lg transition p-5 flex flex-col"
               >
                 <Image
                   src={blog.coverImage}
                   alt={blog.title}
                   width={1200}
                   height={600}
-                  className="object-cover rounded-lg"
+                  className="object-cover "
                 />
                 <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
                 <p className="text-sm text-gray-600 mb-3 line-clamp-3">
@@ -159,6 +161,8 @@ function Blogs() {
           </div>
         )}
       </main>
+      <ContactInfo />
+      <HelpSection />
 
       {/* Footer */}
       <Footer />

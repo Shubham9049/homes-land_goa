@@ -9,7 +9,7 @@
 }
 
 #google_translate_element select {
-  @apply bg-transparent text-white border border-black px-2 rounded-full py-1;
+  @apply bg-transparent text-white border border-white px-2 rounded-full py-1;
 }
 
 #google_translate_element select option {

@@ -43,7 +43,7 @@ const LanguageSelector = () => {
   return (
     <select
       onChange={handleLanguageChange}
-      className="language-selector bg-transparent  text-black  border border-black w-fit pb-1  text-center rounded-full"
+      className="language-selector bg-transparent  text-black  border border-white w-fit pb-1  text-center rounded-full tracking-widest"
       defaultValue=""
     >
       <option value="" disabled>

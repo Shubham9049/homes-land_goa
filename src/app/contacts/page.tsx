@@ -95,8 +95,10 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">Contact Us</h1>
-          <p className="text-lg md:text-2xl max-w-2xl mx-auto">
+          <h1 className="text-5xl md:text-5xl font-bold mb-4 tracking-widest">
+            Contact Us
+          </h1>
+          <p className="text-lg md:text-2xl max-w-2xl mx-auto tracking-widest">
             Get in touch with our team for property inquiries, collaborations,
             or support.
           </p>
@@ -115,7 +117,7 @@ export default function ContactPage() {
         className="w-11/12 md:w-5/6 mx-auto py-16 grid md:grid-cols-2 gap-12 items-start"
       >
         {/* Left info */}
-        <div className="space-y-8">
+        <div className="space-y-8 tracking-widest">
           <h2 className="text-3xl font-bold text-[var(--primary-color)]">
             Contact Information
           </h2>
@@ -149,7 +151,7 @@ export default function ContactPage() {
         {/* Right form */}
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 bg-white dark:bg-[#1e1e1e] p-8 rounded-xl shadow-lg border dark:border-white/10"
+          className="space-y-6 bg-white dark:bg-[#1e1e1e] p-8  shadow-lg border dark:border-white/10"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
@@ -158,7 +160,7 @@ export default function ContactPage() {
               placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              className="border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
+              className="border border-gray-300 dark:border-gray-700 p-3  bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
               required
             />
             <input
@@ -167,7 +169,7 @@ export default function ContactPage() {
               placeholder="Your Email"
               value={formData.email}
               onChange={handleChange}
-              className="border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
+              className="border border-gray-300 dark:border-gray-700 p-3  bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
               required
             />
           </div>
@@ -177,7 +179,7 @@ export default function ContactPage() {
             placeholder="Subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
+            className="w-full border border-gray-300 dark:border-gray-700 p-3  bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
           />
           <textarea
             name="message"
@@ -185,7 +187,7 @@ export default function ContactPage() {
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-700 p-3 rounded-md bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
+            className="w-full border border-gray-300 dark:border-gray-700 p-3  bg-white dark:bg-[#2c2c2c] text-black dark:text-white"
             required
           />
 
@@ -198,7 +200,7 @@ export default function ContactPage() {
           <button
             type="submit"
             disabled={loading}
-            className="relative px-6 py-3 rounded-md bg-[var(--title)] text-white font-semibold 
+            className="relative px-6 py-3  bg-[var(--title)] text-white font-semibold 
   overflow-hidden group cursor-pointer transition-all duration-300"
           >
             <span className="relative z-10">

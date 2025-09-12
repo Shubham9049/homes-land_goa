@@ -21,6 +21,7 @@ import Footer from "../../../../components/Footer";
 import HelpSection from "../../../../components/HelpSection";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ContactInfo from "../../../../components/ContactInfo";
 
 interface Property {
   _id: string;
@@ -136,7 +137,7 @@ export default function BuyDetails() {
         data-aos="fade-up"
       >
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-widest">
             {property.title}
           </h1>
 
@@ -357,6 +358,7 @@ export default function BuyDetails() {
           />
         </section>
       )}
+      <ContactInfo />
 
       <HelpSection />
       <Footer />

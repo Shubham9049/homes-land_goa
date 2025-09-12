@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import {
@@ -10,6 +11,7 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector";
@@ -30,7 +32,7 @@ declare global {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const pathname = usePathname(); // ✅ detect current route
 
   const navItems = [
     { label: "Buy", path: "/buy" },
@@ -42,6 +44,7 @@ const Navbar = () => {
     { label: "Contact Us", path: "/contacts" },
   ];
 
+  // ✅ Google Translate script loader
   useEffect(() => {
     const googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
@@ -61,10 +64,10 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[#091d35] text-white  fixed w-full top-0 z-50  transition-colors">
+    <nav className="bg-[#091d35] text-white fixed w-full top-0 z-50 transition-colors">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex justify-between h-20 items-center">
-          {/* Logo (Always visible) */}
+          {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src={logo}
@@ -76,33 +79,37 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, index) => (
-              <Link
-                key={index}
-                href={item.path}
-                onClick={() => setActiveItem(item.label)}
-                className={`relative pb-1 text-sm transition-colors text-center text-gray-300 font-semibold tracking-widest  hover:text-[#E50E0B] ${
-                  activeItem === item.label ? "text-[#E50E0B]" : "text-white"
-                }`}
-              >
-                {item.label}
-                {activeItem === item.label && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E50E0B]"></span>
-                )}
-              </Link>
-            ))}
+            {navItems.map((item, index) => {
+              const isActive =
+                pathname === item.path || pathname.startsWith(`${item.path}/`);
+
+              return (
+                <Link
+                  key={index}
+                  href={item.path}
+                  className={`relative pb-1 text-sm transition-colors text-center font-semibold tracking-widest ${
+                    isActive
+                      ? "text-[#E50E0B]"
+                      : "text-white hover:text-[#E50E0B]"
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E50E0B]"></span>
+                  )}
+                </Link>
+              );
+            })}
             <div className="notranslate">
               <LanguageSelector />
             </div>
           </div>
 
-          <div className="md:hidden notranslate">
-            <LanguageSelector />
-          </div>
-          {/* Mobile Hamburger */}
-          <div className="md:hidden">
-            {/* Language Selector Centered */}
-
+          {/* Mobile Right Section */}
+          <div className="md:hidden flex items-center gap-4">
+            <div className="notranslate">
+              <LanguageSelector />
+            </div>
             <button
               aria-label="Toggle menu"
               onClick={() => setIsOpen(!isOpen)}
@@ -116,10 +123,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-white z-[9999] flex flex-col items-center p-6 transform transition-transform duration-300 ease-in-out 
-        ${isOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
+        className={`fixed inset-0 bg-white z-[9999] flex flex-col items-center p-6 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } md:hidden`}
       >
-        {/* Header with Logo + Close button */}
+        {/* Header */}
         <div className="flex justify-between items-center w-full mb-6 border-b">
           <Image
             src={logo}
@@ -137,28 +145,30 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Links Centered */}
-        <div className="flex flex-col gap-6  w-full">
-          {navItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.path}
-              onClick={() => {
-                setActiveItem(item.label);
-                setIsOpen(false);
-              }}
-              className={`text-lg transition-colors hover:text-[var(--primary-color)] ${
-                activeItem === item.label
-                  ? "text-[var(--primary-color)] font-medium"
-                  : "text-black"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        {/* Links */}
+        <div className="flex flex-col gap-6 w-full">
+          {navItems.map((item, index) => {
+            const isActive =
+              pathname === item.path || pathname.startsWith(`${item.path}/`);
+
+            return (
+              <Link
+                key={index}
+                href={item.path}
+                onClick={() => setIsOpen(false)}
+                className={`text-lg transition-colors ${
+                  isActive
+                    ? "text-[var(--primary-color)] font-medium"
+                    : "text-black hover:text-[var(--primary-color)]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Social Icons (Bottom) */}
+        {/* Social Icons */}
         <div className="mt-auto flex gap-6 justify-center pt-8 text-xl text-gray-600">
           <a href="#" aria-label="Facebook">
             <FaFacebook />
@@ -178,7 +188,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Google Translate (Hidden container) */}
+      {/* Google Translate Hidden */}
       <div id="google_translate_element" className="hidden" />
     </nav>
   );
