@@ -154,7 +154,7 @@ export default function SellRequestsAdmin() {
       {/* View Modal */}
       {isViewModalOpen && selectedRequest && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto rounded-lg shadow-lg p-6 relative">
+          <div className="bg-gray-800 w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto no-scrollbar rounded-lg shadow-lg p-6 relative">
             <button
               onClick={() => setIsViewModalOpen(false)}
               className="absolute top-3 right-3 text-gray-400 hover:text-white"

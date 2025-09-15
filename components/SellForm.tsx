@@ -109,152 +109,157 @@ export default function SellForm({ onSuccess }: SellFormProps) {
   };
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit}>
-      {/* Seller Info */}
-      <div className="p-6 border  shadow-sm bg-gray-50">
-        <h3 className="text-xl font-semibold mb-4">Seller Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="p-3 border  w-full "
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="p-3 border  w-full"
-          />
-          <PhoneInput
-            country={"in"}
-            value={formData.phone}
-            onChange={(phone) => setFormData({ ...formData, phone })}
-            inputClass="w-full p-3 border  focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
-            buttonClass="border -l h-full" // styles the dropdown button
-            containerClass="w-full"
-            placeholder="Phone Number"
-            enableAreaCodes={true}
-            enableSearch={true}
-          />
-        </div>
-      </div>
-
-      {/* Property Info */}
-      <div className="p-6 border  shadow-sm bg-gray-50">
-        <h3 className="text-xl font-semibold mb-4">Property Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="title"
-            placeholder="Property Title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-            className="p-3 border  w-full col-span-2"
-          />
-          <textarea
-            name="description"
-            placeholder="Property Description"
-            value={formData.description}
-            onChange={handleChange}
-            rows={4}
-            className="p-3 border  w-full col-span-2"
-          ></textarea>
-          <input
-            type="text"
-            name="type"
-            placeholder="Type (Apartment, Land, etc.)"
-            value={formData.type}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="number"
-            name="bedrooms"
-            placeholder="Bedrooms"
-            value={formData.bedrooms}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="number"
-            name="bathrooms"
-            placeholder="Bathrooms"
-            value={formData.bathrooms}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="number"
-            name="areaSqft"
-            placeholder="Area (sq ft)"
-            value={formData.areaSqft}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="text"
-            name="googleMapUrl"
-            placeholder="Google Map URL"
-            value={formData.googleMapUrl}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="text"
-            name="videoLink"
-            placeholder="Video Link"
-            value={formData.videoLink}
-            onChange={handleChange}
-            className="p-3 border  w-full"
-          />
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleImageChange}
-            className="p-3  "
-          />
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
-                overflow-hidden group cursor-pointer transition-all duration-300"
+    <div className="">
+      <form
+        className="space-y-8 max-h-[70vh] overflow-y-auto p-4 no-scrollbar"
+        onSubmit={handleSubmit}
       >
-        <span className="relative z-10 tracking-widest">
-          {loading ? "Submitting..." : "Submit Property"}
-        </span>
-        <span
-          className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+        {/* Seller Info */}
+        <div className="p-6 border  shadow-sm bg-gray-50">
+          <h3 className="text-xl font-semibold mb-4">Seller Information</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="p-3 border  w-full "
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="p-3 border  w-full"
+            />
+            <PhoneInput
+              country={"in"}
+              value={formData.phone}
+              onChange={(phone) => setFormData({ ...formData, phone })}
+              inputClass="w-full p-3 border  focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+              buttonClass="border -l h-full" // styles the dropdown button
+              containerClass="w-full"
+              placeholder="Phone Number"
+              enableAreaCodes={true}
+              enableSearch={true}
+            />
+          </div>
+        </div>
+
+        {/* Property Info */}
+        <div className="p-6 border  shadow-sm bg-gray-50">
+          <h3 className="text-xl font-semibold mb-4">Property Details</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="title"
+              placeholder="Property Title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+              className="p-3 border  w-full col-span-2"
+            />
+            <textarea
+              name="description"
+              placeholder="Property Description"
+              value={formData.description}
+              onChange={handleChange}
+              rows={4}
+              className="p-3 border  w-full col-span-2"
+            ></textarea>
+            <input
+              type="text"
+              name="type"
+              placeholder="Type (Apartment, Land, etc.)"
+              value={formData.type}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={formData.location}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="number"
+              name="bedrooms"
+              placeholder="Bedrooms"
+              value={formData.bedrooms}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="number"
+              name="bathrooms"
+              placeholder="Bathrooms"
+              value={formData.bathrooms}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="number"
+              name="areaSqft"
+              placeholder="Area (sq ft)"
+              value={formData.areaSqft}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="text"
+              name="googleMapUrl"
+              placeholder="Google Map URL"
+              value={formData.googleMapUrl}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="text"
+              name="videoLink"
+              placeholder="Video Link"
+              value={formData.videoLink}
+              onChange={handleChange}
+              className="p-3 border  w-full"
+            />
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageChange}
+              className="p-3  "
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300"
+        >
+          <span className="relative z-10 tracking-widest">
+            {loading ? "Submitting..." : "Submit Property"}
+          </span>
+          <span
+            className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
                   translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
-        ></span>
-      </button>
-    </form>
+          ></span>
+        </button>
+      </form>
+    </div>
   );
 }
