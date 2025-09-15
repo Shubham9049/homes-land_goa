@@ -206,9 +206,16 @@ export default function BuyPage() {
 
                   <button
                     onClick={() => router.push(`/buy/${p.slug}`)}
-                    className="mt-3 w-full bg-[var(--title)] text-white py-2 hover:bg-gray-800 transition"
+                    className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300 w-full mt-4"
                   >
-                    View Details
+                    <span className="relative z-10 tracking-widest">
+                      View Details
+                    </span>
+                    <span
+                      className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+                    ></span>
                   </button>
                 </div>
               </motion.div>

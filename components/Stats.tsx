@@ -89,9 +89,9 @@ const Stats: React.FC = () => {
             className="text-[var(--primary-color)] text-lg font-semibold mb-8 mt-4 tracking-widest"
             data-aos="fade-right"
           >
-            From cozy cottages to luxurious estates, our dedicated team guides
-            you through every step of the journey,ensuring your dream home
-            becomes a reality.
+            From charming cottages to breathtaking luxury estates, our expert
+            team is by your side at every step—making your dream home not just a
+            vision, but a reality.
           </p>
 
           {/* Stats */}

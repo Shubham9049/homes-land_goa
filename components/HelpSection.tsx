@@ -24,7 +24,7 @@ const HelpSection = () => {
 
       {/* Newsletter / Email Form */}
       <form className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
-        <div className="flex items-center bg-[var(--bg-color)] text-[var(--primary-color)] rounded-md px-4 py-3 flex-grow shadow-sm w-full">
+        <div className="flex items-center bg-[var(--bg-color)] text-[var(--primary-color)] px-4 py-3 flex-grow shadow-sm w-full">
           <Mail className="w-5 h-5 mr-2" />
           <input
             type="email"
@@ -35,9 +35,14 @@ const HelpSection = () => {
         </div>
         <button
           type="submit"
-          className="bg-[var(--title)] cursor-pointer text-white px-6 py-3 rounded-md font-semibold hover:bg-[#2a1b13] transition"
+          className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300"
         >
-          Submit
+          <span className="relative z-10 tracking-widest">Submit</span>
+          <span
+            className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+          ></span>
         </button>
       </form>
     </section>
