@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import axios from "axios";
 import {
   Phone,
   Mail,
@@ -16,18 +17,29 @@ import banner from "../../../assets/sell-banner.jpg";
 import Image from "next/image";
 
 function Sell() {
-  const [step, setStep] = useState<"form" | "otp">("form");
   const [loading, setLoading] = useState(false);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    purpose: "sell",
-    message: "",
+    title: "",
+    description: "",
+    purpose: "Buy",
+    type: "",
+    location: "",
+    price: "",
+    bedrooms: "",
+    bathrooms: "",
+    areaSqft: "",
+    highlights: "[]",
+    featuresAmenities: "[]",
+    nearby: "[]",
+    googleMapUrl: "",
+    videoLink: "",
+    extraHighlights: "[]",
   });
 
-  const [otp, setOtp] = useState("");
+  const [images, setImages] = useState<FileList | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -35,6 +47,70 @@ function Sell() {
     >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImages(e.target.files);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      title: "",
+      description: "",
+      purpose: "Buy",
+      type: "",
+      location: "",
+      price: "",
+      bedrooms: "",
+      bathrooms: "",
+      areaSqft: "",
+      highlights: "[]",
+      featuresAmenities: "[]",
+      nearby: "[]",
+      googleMapUrl: "",
+      videoLink: "",
+      extraHighlights: "[]",
+    });
+    setImages(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const data = new FormData();
+      for (const key in formData) {
+        data.append(key, formData[key as keyof typeof formData]);
+      }
+
+      if (images) {
+        Array.from(images).forEach((file) => {
+          data.append("images", file);
+        });
+      }
+
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE}/property/addsell`,
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      alert(
+        "Thank you! Your property is under review. We’ll get back to you soon."
+      );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to submit listing. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const sellRef = useRef<HTMLDivElement | null>(null);
@@ -46,25 +122,6 @@ function Sell() {
 
       window.scrollTo({ top: y, behavior: "smooth" });
     }
-  };
-
-  // Dummy submit handlers (replace with API later)
-  const handleSendOtp = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setStep("otp");
-    }, 1000);
-  };
-
-  const handleVerifyOtp = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      alert("OTP Verified! (Demo only)");
-    }, 1000);
   };
 
   return (
@@ -83,10 +140,6 @@ function Sell() {
           <h1 className="text-3xl md:text-5xl font-bold tracking-widest">
             Sell Your Property With Us
           </h1>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-white mx-auto">
-            Get the best value for your property with our seamless selling
-            process, expert guidance, and trusted network of buyers.
-          </p>
           <button
             onClick={scrollToNext}
             className="mt-10 animate-bounce border rounded-full w-fit px-1 py-2 mx-auto cursor-pointer"
@@ -96,188 +149,142 @@ function Sell() {
         </div>
       </div>
 
-      {/* Process Section */}
+      {/* Sell Form */}
       <section
         ref={sellRef}
-        className="py-12 bg-white w-11/12 md:w-5/6 text-[var(--primary-color)] mx-auto tracking-widest"
+        className="py-16 bg-white w-11/12 md:w-5/6 mx-auto text-[var(--primary-color)]"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest">
-          Our Selling Process
+        <h2 className="text-3xl font-bold text-center mb-12 tracking-widest">
+          Submit Your Property Details
         </h2>
-        <div className="grid md:grid-cols-3 gap-10 ">
-          <div className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg hover:shadow-xl transition bg-[var(--bg-color)]">
-            <ClipboardList size={40} className="text-[var(--title)] mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-[var(--title)]">
-              Step 1: Share Your Details
-            </h3>
-            <p className="text-[var(--primary-color)]">
-              Fill out our form or call us directly to provide basic information
-              about your property.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg hover:shadow-xl transition bg-[var(--bg-color)]">
-            <Home size={40} className="text-[var(--title)] mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-[var(--title)]">
-              Step 2: Property Evaluation
-            </h3>
-            <p className="text-[var(--primary-color)]">
-              Our experts will evaluate your property and suggest the best
-              market price.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg hover:shadow-xl transition bg-[var(--bg-color)]">
-            <DollarSign size={40} className="text-[var(--title)] mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-[var(--title)]">
-              Step 3: Close the Deal
-            </h3>
-            <p className="text-[var(--primary-color)]">
-              We connect you with genuine buyers and ensure a hassle-free
-              closing process.
-            </p>
-          </div>
-        </div>
-      </section>
+        <form
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="p-3 border rounded"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="p-3 border rounded"
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Your Phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="p-3 border rounded"
+          />
+          <input
+            type="text"
+            name="title"
+            placeholder="Property Title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            className="p-3 border rounded"
+          />
+          <textarea
+            name="description"
+            placeholder="Property Description"
+            value={formData.description}
+            onChange={handleChange}
+            rows={4}
+            className="p-3 border rounded"
+          ></textarea>
+          <input
+            type="text"
+            name="type"
+            placeholder="Type (Apartment, Land, etc.)"
+            value={formData.type}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={formData.price}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="number"
+            name="bedrooms"
+            placeholder="Bedrooms"
+            value={formData.bedrooms}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="number"
+            name="bathrooms"
+            placeholder="Bathrooms"
+            value={formData.bathrooms}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="number"
+            name="areaSqft"
+            placeholder="Area (sq ft)"
+            value={formData.areaSqft}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="text"
+            name="googleMapUrl"
+            placeholder="Google Map URL"
+            value={formData.googleMapUrl}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="text"
+            name="videoLink"
+            placeholder="Video Link"
+            value={formData.videoLink}
+            onChange={handleChange}
+            className="p-3 border rounded"
+          />
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageChange}
+            className="p-3 border rounded"
+          />
 
-      {/* Why Choose Us */}
-      <section className="py-12 bg-[var(--bg-color)] text-[var(--primary-color)] tracking-widest">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest">
-          Why Sell With Us?
-        </h2>
-        <div className="grid md:grid-cols-3 gap-10 w-11/12 md:w-5/6 mx-auto">
-          {[
-            {
-              title: "Trusted Network",
-              desc: "Access to genuine buyers & investors.",
-            },
-            {
-              title: "Best Market Price",
-              desc: "Get accurate valuation and maximum returns.",
-            },
-            {
-              title: "Hassle-Free Process",
-              desc: "We handle the legal and documentation work.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-4 p-6 rounded-xl bg-white shadow"
-            >
-              <CheckCircle className="text-[var(--title)]" size={32} />
-              <div>
-                <h3 className="text-lg font-semibold text-[var(--title)]">
-                  {item.title}
-                </h3>
-                <p className="text-[var(--primary-color)]">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact Form with OTP */}
-      <section className="py-16 bg-white w-11/12 md:w-5/6 mx-auto text-[var(--primary-color)]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-widest ">
-          Get In Touch With Us
-        </h2>
-        <div className="grid md:grid-cols-2 gap-10 items-center tracking-widest">
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <p className="text-lg text-gray-600">
-              Want to sell your property quickly and easily? Fill out the form
-              or contact us directly.
-            </p>
-            <div className="flex items-center gap-3">
-              <Phone className="text-[var(--title)]" />
-              <span className="text-lg">+91 96238 58108</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Mail className="text-[var(--title)]" />
-              <span className="text-lg">info@homesandlandgoa.com</span>
-            </div>
-          </div>
-
-          {/* OTP Form */}
-          {step === "form" ? (
-            <form
-              className="bg-[#f9f9f9] p-8 rounded-2xl shadow-md space-y-4"
-              onSubmit={handleSendOtp}
-            >
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c9a368] outline-none"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c9a368] outline-none"
-                required
-              />
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Your Phone"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c9a368] outline-none"
-                required
-              />
-              <select
-                name="purpose"
-                value={formData.purpose}
-                onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] outline-none text-black"
-              >
-                <option value="sell">Sell</option>
-                <option value="buy">Buy</option>
-              </select>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Tell us about your property"
-                rows={4}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] outline-none text-black"
-                required
-              ></textarea>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-[var(--primary-color)] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition"
-              >
-                {loading ? "Sending OTP..." : "Submit & Get OTP"}
-              </button>
-            </form>
-          ) : (
-            <form
-              className="bg-[#f9f9f9] p-8 rounded-2xl shadow-md space-y-4"
-              onSubmit={handleVerifyOtp}
-            >
-              <input
-                type="text"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                placeholder="Enter OTP"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] outline-none"
-                required
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-[var(--primary-color)] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition"
-              >
-                {loading ? "Verifying..." : "Verify OTP"}
-              </button>
-            </form>
-          )}
-        </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="col-span-full bg-[var(--primary-color)] text-white p-4 rounded cursor-pointer"
+          >
+            {loading ? "Submitting..." : "Submit Property"}
+          </button>
+        </form>
       </section>
 
       <Footer />
