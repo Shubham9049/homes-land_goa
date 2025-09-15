@@ -111,7 +111,7 @@ export default function OurJourney() {
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--title)] mb-6 tracking-widest">
               Our Story
             </h2>
-            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose mb-4 tracking-widest">
+            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose mb-4 tracking-widest text-justify">
               What began as a small team with a passion for real estate has
               grown into a trusted brand that helps people turn dreams of owning
               property into reality. From modest beginnings, we’ve expanded our
@@ -120,7 +120,7 @@ export default function OurJourney() {
               of time.
             </p>
 
-            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose tracking-widest">
+            <p className="text-md text-gray-800 dark:text-gray-200 leading-loose tracking-widest text-justify">
               Our journey is built on a foundation of trust, transparency, and
               commitment to excellence. Every project we undertake reflects our
               belief that real estate is more than just buildings, it’s about
