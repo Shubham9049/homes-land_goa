@@ -110,10 +110,10 @@ export default function RentPage() {
           transition={{ duration: 1 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold tracking-widest">
-            Find Your Dream Home in Goa
+            Find Your Perfect Rental in Goa
           </h1>
           <p className="mt-4 text-lg tracking-widest">
-            Apartments • Villas • Plots
+            Apartments • Villas • Holiday Rentals
           </p>
           <button
             onClick={scrollToNext}

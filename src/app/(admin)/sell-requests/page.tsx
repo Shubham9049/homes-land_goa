@@ -229,9 +229,17 @@ export default function SellRequestsAdmin() {
                 <button
                   onClick={() => handleApprove(selectedRequest._id)}
                   disabled={isApproving}
-                  className="flex items-center gap-2 bg-[#091d35] hover:bg-[#192b42] disabled:opacity-50 text-white px-4 py-2 shadow mb-6 rounded-lg"
+                  className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300"
                 >
-                  {isApproving ? "Approving..." : "Approve"}
+                  <span className="relative z-10 tracking-widest">
+                    {isApproving ? "Approving..." : "Approve"}
+                  </span>
+
+                  <span
+                    className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+                  ></span>
                 </button>
               </div>
             )}

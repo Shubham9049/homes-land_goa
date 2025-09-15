@@ -110,11 +110,12 @@ export default function UpcomingPage() {
           transition={{ duration: 1 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold tracking-widest">
-            Find Your Dream Home in Goa
+            Explore Upcoming Projects in Goa
           </h1>
           <p className="mt-4 text-lg tracking-widest">
-            Apartments • Villas • Plots
+            Villas • Apartments • Plots • Commercial Spaces
           </p>
+
           <button
             onClick={scrollToNext}
             className="mt-10 animate-bounce border rounded-full w-fit px-1 py-2 mx-auto cursor-pointer"
