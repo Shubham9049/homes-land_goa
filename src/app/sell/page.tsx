@@ -94,7 +94,7 @@ function Sell() {
       }
 
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE}/property/addsell`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/addsell`,
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
