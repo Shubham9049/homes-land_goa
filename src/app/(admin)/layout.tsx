@@ -12,6 +12,7 @@ import {
   X,
   Building2,
   Contact,
+  Handshake,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "../../../assets/logo.png";
@@ -29,6 +30,7 @@ export default function AdminDashboardLayout({
     { name: "Blogs", href: "/adminblogs", icon: FileText },
     { name: "Properties", href: "/properties", icon: Building2 },
     { name: "Contact Request", href: "/contact-requests", icon: Contact },
+    { name: "Sell Request", href: "/sell-requests", icon: Handshake },
   ];
 
   return (
