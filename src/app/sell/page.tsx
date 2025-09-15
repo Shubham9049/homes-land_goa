@@ -229,15 +229,7 @@ function Sell() {
                 className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c9a368] outline-none"
                 required
               />
-              <select
-                name="purpose"
-                value={formData.purpose}
-                onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] outline-none text-black"
-              >
-                <option value="sell">Sell</option>
-                <option value="buy">Buy</option>
-              </select>
+
               <textarea
                 name="message"
                 value={formData.message}
