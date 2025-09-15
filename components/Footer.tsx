@@ -10,10 +10,12 @@ const Footer = () => {
   return (
     <footer className="bg-[#091d35] text-white pt-12">
       {/* Main Footer Content */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 w-11/12 mx-auto pb-10">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-10 w-11/12 mx-auto pb-10">
         {/* Brand Section */}
-        <div className="md:col-span-1">
-          <Image src={logo} alt="Company Logo" width={150} />
+        <div className="col-span-2 md:col-span-1 ">
+          <div className="flex justify-center">
+            <Image src={logo} alt="Company Logo" width={150} />
+          </div>
         </div>
 
         {/* Quick Links */}
@@ -92,7 +94,7 @@ const Footer = () => {
         </div>
 
         {/* Contact */}
-        <div>
+        <div className="col-span-2 md:col-span-1">
           <h3 className="text-2xl font-bold mb-3">Contact</h3>
           <ul className="space-y-3 text-base ">
             <li className="flex items-start gap-2">
@@ -115,10 +117,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-300 text-center py-4 text-sm md:text-base">
+      <div className="border-t border-gray-300 text-center py-4 text-sm md:text-base space-y-2">
         <p>
           © {new Date().getFullYear()} HOMES & LAND GOA. All Rights Reserved.{" "}
           <br />
+        </p>
+        <p>
           Made & Marketed by{" "}
           <Link
             href="https://www.bigwigmediadigital.com/"

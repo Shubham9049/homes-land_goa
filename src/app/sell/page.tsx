@@ -135,7 +135,7 @@ function Sell() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative h-[100vh] bg-black flex flex-col justify-center items-center text-center px-6 tracking-widest">
+      <div className="relative h-[70vh] md:h-[100vh] bg-black flex flex-col justify-center items-center text-center px-6 tracking-widest">
         <Image
           src={banner}
           alt="Banner"

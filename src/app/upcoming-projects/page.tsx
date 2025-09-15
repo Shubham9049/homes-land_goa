@@ -96,7 +96,7 @@ export default function UpcomingPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative h-[100vh] bg-black text-white flex items-center justify-center">
+      <div className="relative h-[70vh] md:h-[100vh] bg-black text-white flex items-center justify-center">
         <Image
           src={banner}
           alt="Goa Homes"

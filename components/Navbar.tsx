@@ -176,14 +176,9 @@ const Navbar = () => {
           <a href="#" aria-label="Instagram">
             <FaInstagram />
           </a>
-          <a href="#" aria-label="YouTube">
-            <FaYoutube />
-          </a>
+
           <a href="#" aria-label="Twitter">
             <FaTwitter />
-          </a>
-          <a href="#" aria-label="WhatsApp">
-            <FaWhatsapp />
           </a>
         </div>
       </div>

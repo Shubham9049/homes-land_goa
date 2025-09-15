@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[50vh] md:h-screen flex items-center justify-center">
+    <section className="relative w-full h-[70vh] md:h-screen flex items-center justify-center">
       {/* ✅ Background Image */}
       <Image
         src={hero}

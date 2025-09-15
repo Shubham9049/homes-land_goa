@@ -85,7 +85,7 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="relative w-full h-[80vh] flex items-center justify-center pt-32">
+      <section className="relative w-full h-[70vh] md:h-[100vh] flex items-center justify-center pt-32">
         <Image
           src={contactBanner}
           alt="Contact page"
@@ -95,7 +95,7 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-5xl font-bold mb-4 tracking-widest">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-widest">
             Contact Us
           </h1>
           <p className="text-lg md:text-2xl max-w-2xl mx-auto tracking-widest">
