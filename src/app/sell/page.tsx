@@ -12,7 +12,7 @@ import {
 
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
-import banner from "../../../assets/sell.webp";
+import banner from "../../../assets/sell-banner.jpg";
 import Image from "next/image";
 
 function Sell() {
@@ -72,12 +72,13 @@ function Sell() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative pt-[80px] md:pt-[128px] h-[80vh] flex flex-col justify-center items-center text-center px-6 tracking-widest">
+      <div className="relative h-[100vh] bg-black flex flex-col justify-center items-center text-center px-6 tracking-widest">
         <Image
           src={banner}
           alt="Banner"
           className="absolute inset-0 w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative text-white">
           <h1 className="text-3xl md:text-5xl font-bold tracking-widest">
             Sell Your Property With Us

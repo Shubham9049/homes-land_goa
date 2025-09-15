@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { MapPin, Home } from "lucide-react";
-import banner from "../../../assets/buybanner.webp";
+import banner from "../../../assets/upcoming-banner.webp";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import HelpSection from "../../../components/HelpSection";
@@ -96,7 +96,7 @@ export default function UpcomingPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative h-[80vh] bg-black text-white flex items-center justify-center">
+      <div className="relative h-[100vh] bg-black text-white flex items-center justify-center">
         <Image
           src={banner}
           alt="Goa Homes"
