@@ -8,6 +8,8 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import HelpSection from "../../../components/HelpSection";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import ContactInfo from "../../../components/ContactInfo";
 
 interface Property {
   _id: string;
@@ -20,7 +22,7 @@ interface Property {
   purpose?: string;
 }
 
-export default function BuyPage() {
+export default function RentPage() {
   const [selectedType, setSelectedType] = useState("All");
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +34,6 @@ export default function BuyPage() {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`)
       .then((res) => res.json())
       .then((data) => {
-        // filter only BUY properties
         const buyProperties = data.filter(
           (p: Property) => p.purpose?.toLowerCase() === "rent"
         );
@@ -71,12 +72,17 @@ export default function BuyPage() {
           fill
           className="object-cover opacity-70"
         />
-        <div className="relative z-10 text-center">
+        <motion.div
+          className="relative z-10 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <h1 className="text-4xl md:text-5xl font-bold tracking-widest">
             Find Your Dream Home in Goa
           </h1>
           <p className="mt-4 text-lg tracking-widest">
-            Apartments • Villas • Penthouses
+            Apartments • Villas • Plots
           </p>
           <button
             onClick={scrollToNext}
@@ -84,13 +90,24 @@ export default function BuyPage() {
           >
             <span className="text-3xl">↓</span>
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center tracking-widest">
-        {["All", "Apartment", "Villa", "Penthouse"].map((type) => (
-          <button
+      <motion.div
+        className="sticky top-0 bg-white shadow-md z-20 flex gap-4 p-4 justify-center tracking-widest"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 },
+          },
+        }}
+      >
+        {["All", "Apartment", "Villa", "Plot"].map((type) => (
+          <motion.button
             key={type}
             onClick={() => setSelectedType(type)}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
@@ -98,20 +115,24 @@ export default function BuyPage() {
                 ? "bg-[var(--title)] text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
           >
             {type}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Property List */}
-      <div ref={buyRef} className="py-12 bg-[var(--bg-color)]">
+      <div ref={buyRef} className="py-12 ">
         {loading ? (
           <p className="text-center py-20 text-gray-500">
             Loading properties...
           </p>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-20 text-gray-500 col-span-full">
+          <div className="text-center py-20 text-gray-500 col-span-full tracking-widest">
             <h2 className="text-2xl font-semibold mb-2">
               No properties available
             </h2>
@@ -124,11 +145,26 @@ export default function BuyPage() {
             </p>
           </div>
         ) : (
-          <div className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="w-11/12 md:w-5/6 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 tracking-widest"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.2 },
+              },
+            }}
+          >
             {filtered.map((p) => (
-              <div
+              <motion.div
                 key={p._id}
-                className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
+                className=" overflow-hidden shadow-md hover:shadow-xl transition bg-white"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9, y: 30 },
+                  visible: { opacity: 1, scale: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6 }}
               >
                 {/* Image */}
                 <div className="relative h-64 w-full">
@@ -148,7 +184,7 @@ export default function BuyPage() {
                 </div>
 
                 {/* Info */}
-                <div className="p-4">
+                <div className="p-4 bg-[var(--bg-color)]">
                   <h3 className="font-bold text-[var(--title)] text-lg line-clamp-1">
                     {p.title}
                   </h3>
@@ -169,18 +205,25 @@ export default function BuyPage() {
                   )}
 
                   <button
-                    onClick={() => router.push(`/upcoming-projects/${p.slug}`)}
-                    className="mt-3 w-full bg-[var(--title)] text-white py-2 rounded-lg hover:bg-gray-800"
+                    onClick={() => router.push(`/rent/${p.slug}`)}
+                    className="relative px-6 py-3  bg-[#E50E0B] text-white font-semibold 
+                overflow-hidden group cursor-pointer transition-all duration-300 w-full mt-4"
                   >
-                    View Details
+                    <span className="relative z-10 tracking-widest">
+                      View Details
+                    </span>
+                    <span
+                      className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/20 to-transparent 
+                  translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
+                    ></span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
-
+      <ContactInfo />
       <HelpSection />
       <Footer />
     </div>

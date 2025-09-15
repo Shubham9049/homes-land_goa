@@ -82,7 +82,7 @@ export default function BuyPage() {
             Find Your Dream Home in Goa
           </h1>
           <p className="mt-4 text-lg tracking-widest">
-            Apartments • Villas • Plot
+            Apartments • Villas • Plots
           </p>
           <button
             onClick={scrollToNext}
